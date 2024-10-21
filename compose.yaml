@@ -1,0 +1,89 @@
+# docker composerのバージョンの指定
+# version: "3.9"
+
+services:
+  node:
+    # buildするdockerfileの位置
+    build: ./front
+    # 作成するdockerコンテナの名前
+    container_name: node
+    # docker内と共有するフォルダの指定
+    volumes:
+      - ./front:/front
+      # - ./front/scripts:/front
+    # docker内に入った時の初期パスの指定
+    working_dir: /front
+    # コンテナにバインドするポートの指定（左:自分のPCポート、右:dookerコンテナのポート）
+    
+    # command: bash -c "./start.sh"
+    ports:
+      - 3000:3000
+    # コンテナが勝手に終了しないための設定
+    tty: true
+    # 標準入出力とエラー出力をコンテナに結びつける設定
+    stdin_open: true
+    # ホットリロードを行う設定
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    # cdコマンドでappディレクトリに移動してpackage.jsonで定義されたstartスクリプトを実行
+    command: sh -c 'cd app && npm run start'
+    networks:
+      - front_network
+
+
+  flask:
+    container_name: flask
+    depends_on:
+      - db
+    build: ./back
+    ports:
+      - "5001:5000"
+    # コンテナが勝手に終了しないための設定
+    tty: true
+    volumes:
+      - ./back/app:/usr/src/app:cached
+      # - ./back/DB:/usr/src/db:cached
+      # - ./back/scripts:/usr/src/scripts:cached
+    working_dir: /usr/src/app
+    # command: bash -c "./run.sh"
+    networks:
+      - back_network
+    environment:
+      FLASK_ENV: "development"
+      TZ: "Asia/Tokyo"
+    env_file:
+      - .env.dev
+      
+  db:
+    container_name: mysql_db
+    platform: linux/amd64
+    build: ./back/DB
+    restart: always
+    tty: true
+    expose:
+      - "3306"
+    volumes:
+      - ./back/DB/conf.d:/etc/mysql/conf.d:cached
+      - ./back/DB/initdb.d:/initdb.d/
+      - ./log/db:/var/log/mysql:cached
+    networks:
+      - back_network
+    environment:
+      # APP_ENV: "development"
+      TZ: "Asia/Tokyo"
+      FLASK_ENV: development
+    env_file:
+      - .env.dev
+
+networks:
+  # default:
+  #   external:
+  #     name: bridge
+  back_network:
+    name: back_network
+    driver: bridge
+    # external: true
+  front_network:
+    name: front_network
+    driver: bridge
+    # external: true
