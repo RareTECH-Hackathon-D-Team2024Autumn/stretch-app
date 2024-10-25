@@ -36,7 +36,6 @@
 
 ## プロジェクト名
 
-React、DRF、Terraform のテンプレートリポジトリ
 
 <!-- プロジェクトについて -->
 
@@ -61,10 +60,10 @@ React、DRF、Terraform のテンプレートリポジトリ
 ## ディレクトリ構成
 
 <!-- Treeコマンドを使ってディレクトリ構成を記載 -->
-# -Iオプションで除外条件の指定
-# node_modulesを除外
+-Iオプションで除外条件の指定
+node_modulesを除外
 
-❯ tree  -I "node_modules" -L 4 
+❯ tree  -I "node_modules" -L 4
 
 .
 ├── README.md
@@ -119,7 +118,7 @@ React、DRF、Terraform のテンプレートリポジトリ
 
 1. compose.yamlのある階層まで移動
 
-2. frontディレクトリのappディレクトリを削除
+2. frontディレクトリにappディレクトリがあれば削除
 
 2. docker buildコマンドで Dockerコンテナの起動、構成、Dockerイメージの作成を実行
 
