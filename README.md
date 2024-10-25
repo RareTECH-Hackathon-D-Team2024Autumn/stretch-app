@@ -65,6 +65,7 @@ node_modulesを除外
 
 ❯ tree  -I "node_modules" -L 4
 
+```plaintext
 .
 ├── README.md
 ├── back
@@ -107,6 +108,7 @@ node_modulesを除外
 │           └── setupTests.js
 └── log
     └── db
+```
 
 <p align="right">(<a href="#top">トップへ</a>)</p>
 
