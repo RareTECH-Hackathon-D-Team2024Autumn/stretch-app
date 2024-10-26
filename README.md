@@ -124,7 +124,7 @@ node_modulesを除外
 
 2. docker buildコマンドで Dockerコンテナの起動、構成、Dockerイメージの作成を実行
 
-docker build
+docker compose build
 
 3. Dockerコンテナ内でReactプロジェクトを作成
 
