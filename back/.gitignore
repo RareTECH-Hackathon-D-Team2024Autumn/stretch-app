@@ -1,1 +1,4 @@
 /app/venv
+# Python bytecode
+*.pyc
+__pycache__/
