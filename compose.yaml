@@ -52,7 +52,7 @@ services:
       FLASK_ENV: "development"
       TZ: "Asia/Tokyo"
     env_file:
-      - .env.dev
+      - .env
       
   db:
     container_name: mysql_db
@@ -73,7 +73,7 @@ services:
       TZ: "Asia/Tokyo"
       FLASK_ENV: development
     env_file:
-      - .env.dev
+      - .env
 
 networks:
   # default:
