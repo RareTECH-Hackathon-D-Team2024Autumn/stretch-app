@@ -168,6 +168,7 @@ http://localhost:3000 にアクセスできるか確認
 
 4. mysql -u root -pなどでユーザーを指定し、パスワードを入力してMySQLへログイン
 
+5. MySQLはquit; Dockerはexitで終了
 
 ### コンテナの停止
 
