@@ -16,7 +16,6 @@
   <img src="https://img.shields.io/badge/-MySQL-4479A1.svg?logo=mysql&style=for-the-badge&logoColor=white">
   <!-- インフラ一覧 -->
   <img src="https://img.shields.io/badge/-Docker-1488C6.svg?logo=docker&style=for-the-badge">
-  <img src="https://img.shields.io/badge/-githubactions-FFFFFF.svg?logo=github-actions&style=for-the-badge">
   <img src="https://img.shields.io/badge/-Amazon%20aws-232F3E.svg?logo=amazon-aws&style=for-the-badge">
 </p>
 
@@ -120,43 +119,35 @@ node_modulesを除外
 
 1. compose.yamlのある階層まで移動
 
-2. frontディレクトリにappディレクトリがあれば削除
+2. docker buildコマンドで Dockerイメージの作成
 
-2. docker buildコマンドで Dockerコンテナの起動、構成、Dockerイメージの作成を実行
-
-docker compose build
+   docker compose build
 
 3. Dockerコンテナ内でReactプロジェクトを作成
 
-docker compose run --rm node sh -c "npx create-react-app app"
-
-docker compose run: 一時的にコンテナを起動して指定したコマンドを実行
---rm: コマンドの終了後、コンテナを自動的に削除
-node: compose.yamlファイル内で定義されたnodeを実行
-sh -c: シェルを使用して指定したコマンドを実行
-npx create-react-app app: 新しいReactアプリケーションを作成するためのコマンドを実行
+   docker compose run --rm node sh -c "cd app && npm install"
 
 4. docker compose upでDockerコンテナを起動
 
-docker compose up -d
+   docker compose up -d
 
--d: コンテナをバックグラウンドで実行させる
-    付与しないとフォアグラウンドで実行されて、コンテナのログが画面上に出力され、ターミナル上で続けてコマンドを打てなくなる
+   -d: コンテナをバックグラウンドで実行させる
+       付与しないとフォアグラウンドで実行されて、コンテナのログが画面上に出力され、ターミナル上で続けてコマンドを打てなくなる
 
 5. 確認できたら、コンテナを停止させる
 
-docker compose stop
+   docker compose stop
 
 6. 再び起動させる
 
-docker compose start
+   docker compose start
 
 ※ コンテナを削除するコマンド
 
-docker compose down --rmi all
+   docker compose down --rmi all
 
---rmi: イメージも同時に削除
-all: 全てのイメージを削除
+   --rmi: イメージも同時に削除
+   all: 全てのイメージを削除
 
 ### 動作確認
 
@@ -167,6 +158,15 @@ http://localhost:5001 にアクセスできるか確認
 フロントエンド
 http://localhost:3000 にアクセスできるか確認
 アクセスできたら成功
+
+データベース
+1. stretch-appディレクトリにて、docker compose up -d の実行
+
+2. docker psを実行し、mysql_dbが起動しているか確認
+
+3. docker exec -it mysql_db bashを実行し、Dockerにログイン
+
+4. mysql -u root -pなどでユーザーを指定し、パスワードを入力してMySQLへログイン
 
 
 ### コンテナの停止
