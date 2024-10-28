@@ -1,38 +1,93 @@
-.App {
+body {
+ overflow-y: hidden;
+}
+
+.formContainer {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.formContainer form {
+  background-color: rgb(239, 243, 245);
+  width: 70%;
+  max-width: 450px;
+  padding: 30px;
+  border-radius: 10px;
+  border: 1px solid rgb(238, 226, 226);
+}
+
+h1 {
   text-align: center;
+  color: #053cbb;
+  font-size: 40px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.uiForm {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  justify-content: space-evenly;
+  height: 400px;
+}
+.formField {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.formField input {
+  border: 1px solid grey;
+  padding: 20px;
+  border-radius: 4px;
+}
+
+.formField input:focus {
+  outline: none;
+}
+
+.formField label {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+.Button {
+  display: flex;
+  justify-content: space-between;
+  width: 100% ;
+  transition: all 0.2s;
+}
+
+.submitButton {
+  background-color: #053cbb;
+  width: 35%;
+  margin-top: 10px;
+  border: none;
+  border-radius:  5px;
+  padding: 10px 30px;
   color: white;
+  font-size: 15px;
+  cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
+.loginButton{
+  background-color: #44deec;
+  width: 35%;
+  margin-top: 10px;
+  border: none;
+  border-radius:  5px;
+  padding: 10px 30px;
+  font-size: 15px;
+  cursor: pointer; 
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.submitButton:hover {
+  background-color: #073398;
+}
+
+.loginButton:hover {
+  background-color: #0aadb9;
 }
