@@ -8,7 +8,7 @@ export default function signup() {
           <hr></hr>
           <div className="uiForm">
             <div className="formField">
-              <label for="name">
+              <label>
                 ユーザー名
                 <input
                   type="text"
@@ -18,7 +18,7 @@ export default function signup() {
               </label>
             </div>
             <div className="formField">
-              <label for="name">
+              <label>
                 メールアドレス
                 <input
                   type="text"
@@ -28,7 +28,7 @@ export default function signup() {
               </label>
             </div>
             <div className="formField">
-              <label for="name">
+              <label>
                 パスワード
                 <input
                   type="text"
