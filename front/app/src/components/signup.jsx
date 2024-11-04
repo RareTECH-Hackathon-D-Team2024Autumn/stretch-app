@@ -8,34 +8,31 @@ export default function signup() {
           <hr></hr>
           <div className="uiForm">
             <div className="formField">
-              <label>
-                ユーザー名
-                <input
-                  type="text"
-                  placeholder="ユーザー名を入力"
-                  name="username"
-                ></input>
-              </label>
+              <label htmlFor="username">ユーザー名</label>
+              <input
+                id="username"
+                type="text"
+                placeholder="ユーザー名を入力"
+                name="username"
+              ></input>
             </div>
             <div className="formField">
-              <label>
-                メールアドレス
-                <input
-                  type="text"
-                  placeholder="メールアドレスを入力"
-                  name="email"
-                ></input>
-              </label>
+              <label htmlFor="email">メールアドレス</label>
+              <input
+                id="email"
+                type="text"
+                placeholder="メールアドレスを入力"
+                name="email"
+              ></input>
             </div>
             <div className="formField">
-              <label>
-                パスワード
-                <input
-                  type="text"
-                  placeholder="パスワードを入力"
-                  name="password"
-                ></input>
-              </label>
+              <label htmlFor="password">パスワード</label>
+              <input
+                id="password"
+                type="password"
+                placeholder="パスワードを入力"
+                name="password"
+              ></input>
             </div>
             <button className="submitButton">登録</button>
           </div>
