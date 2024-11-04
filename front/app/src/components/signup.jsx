@@ -1,3 +1,4 @@
+import "../styles/signup.css";
 
 export default function signup() {
   return (
