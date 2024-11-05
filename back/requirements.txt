@@ -12,5 +12,3 @@ Flask-login
 Flask-bcrypt
 wtforms
 datetime
-
-

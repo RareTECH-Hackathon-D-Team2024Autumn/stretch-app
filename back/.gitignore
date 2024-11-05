@@ -2,3 +2,5 @@
 # Python bytecode
 *.pyc
 __pycache__/
+# .envを追跡対象外とする
+.env
