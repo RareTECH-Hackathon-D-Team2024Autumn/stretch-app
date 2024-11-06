@@ -22,6 +22,10 @@ function Login() {
     setIsSubmit(true);
   };
 
+  const navigate = useNavigate();
+  const handleSignup = () => {
+    navigate("/signup");
+  };
   const validate = (values) => {
     const errors = {};
     const regex = /^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/;
@@ -65,8 +69,10 @@ function Login() {
             />
           </div>
           <p className="errorMsg">{formErrors.password}</p>
-          <div className= "Button">
-            <button className="submitButton">新規登録</button>
+          <div className="Button">
+            <button className="submitButton" onClick={handleSignup}>
+              新規登録
+            </button>
             <button className="loginButton">ログイン</button>
           </div>
           <div>
