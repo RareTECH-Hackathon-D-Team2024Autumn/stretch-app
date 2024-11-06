@@ -1,6 +1,6 @@
 import "../styles/signup.css";
 
-export default function signup() {
+export default function Signup() {
   return (
     <>
       <div className="formContainer">
