@@ -5,10 +5,11 @@ SQLAlchemy==1.4.54
 SQLAlchemy-Utils==0.41.2
 Werkzeug==3.1.1
 Flask-Bcrypt==1.0.1
-python-dotenv==1.0.1
 Flask-sqlalchemy
 Flask-migrate
 Flask-login
 Flask-bcrypt
 wtforms
 datetime
+python-dotenv
+
