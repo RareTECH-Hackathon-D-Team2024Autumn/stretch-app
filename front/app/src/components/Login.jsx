@@ -33,6 +33,7 @@ function Login() {
     navigate("/Top");
   };
 
+  // バリデーションチェック
   const validate = (values) => {
     const errors = {};
     const regex =
