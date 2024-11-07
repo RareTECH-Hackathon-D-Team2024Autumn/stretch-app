@@ -1,6 +1,13 @@
+import { useNavigate } from "react-router-dom";
 import "../styles/Signup.css";
 
 export default function Signup() {
+  // ルーティング設定
+  const navigate = useNavigate();
+  const handleRegister = () => {
+    navigate("/top");
+  };
+
   return (
     <>
       <div className="formContainer">
@@ -35,7 +42,9 @@ export default function Signup() {
                 name="password"
               ></input>
             </div>
-            <button className="submitButton">登録</button>
+            <button className="submitButton" onClick={handleRegister}>
+              登録
+            </button>
           </div>
         </form>
       </div>

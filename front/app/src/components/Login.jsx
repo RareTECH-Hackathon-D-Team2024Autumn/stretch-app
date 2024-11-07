@@ -23,10 +23,16 @@ function Login() {
     setIsSubmit(true);
   };
 
+  // ルーティング設定
   const navigate = useNavigate();
+
   const handleSignup = () => {
     navigate("/signup");
   };
+  const handleLogin = () => {
+    navigate("/Top");
+  };
+
   const validate = (values) => {
     const errors = {};
     const regex =
@@ -75,7 +81,9 @@ function Login() {
             <button className="submitButton" onClick={handleSignup}>
               新規登録
             </button>
-            <button className="loginButton">ログイン</button>
+            <button className="loginButton" onClick={handleLogin}>
+              ログイン
+            </button>
           </div>
           <div>
             {Object.keys(formErrors).length === 0 && isSubmit && (
