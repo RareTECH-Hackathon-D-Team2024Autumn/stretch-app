@@ -1,11 +1,12 @@
-import {useState} from "react";
-import '../styles/Login.css';
+import { useState } from "react";
+import "../styles/Login.css";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const initialValues = {mailAddress: "",password: ""};
-  const [formValues,setFormValues] = useState(initialValues);
-  const [formErrors,setFormErrors] = useState({});
-  const [isSubmit,setIsSubmit] = useState(false);
+  const initialValues = { mailAddress: "", password: "" };
+  const [formValues, setFormValues] = useState(initialValues);
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
 
   const handleChange = (e) => { 
     const { name, value } =e.target;
@@ -13,7 +14,7 @@ function Login() {
     console.log(formValues);
   };
 
-  const handleSubmit =(e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     //ログイン情報を送信する
     //バリデーションチェックする
@@ -21,15 +22,27 @@ function Login() {
     setIsSubmit(true);
   };
 
+  // ルーティング設定
+  const navigate = useNavigate();
+
+  const handleSignup = () => {
+    navigate("/signup");
+  };
+  const handleLogin = () => {
+    navigate("/Top");
+  };
+
+  // バリデーションチェック
   const validate = (values) => {
     const errors = {};
-    const regex = /^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/;
-    if(!values.mailAddress){
+    const regex =
+      /^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/;
+    if (!values.mailAddress) {
       errors.mailAddress = "メールアドレスを入力してください";
-    } else if(!regex.test(values.mailAddress)) {
+    } else if (!regex.test(values.mailAddress)) {
       errors.mailAddress = "正しいメールアドレスを入力してください";
     }
-    if(!values.password){
+    if (!values.password) {
       errors.password = "パスワードを入力してください";
     } else if (values.password.length < 4) {
       errors.password = "4文字以上15文字以下のパスワードを入力してください";
@@ -46,31 +59,34 @@ function Login() {
         <div className="uiForm">
           <div className="formField">
             <lavel>メールアドレス</lavel>
-            <input 
-              type="text" 
-              placeholder="メールアドレスを入力してください" 
-              name="mailAddress" 
+            <input
+              type="text"
+              placeholder="メールアドレスを入力してください"
+              name="mailAddress"
               onChange={(e) => handleChange(e)}
             />
           </div>
           <p className="errorMsg">{formErrors.mailAddress}</p>
           <div className="formField">
             <lavel>パスワード</lavel>
-            <input 
-              type="text" 
-              placeholder="パスワードを入力してください" 
+            <input
+              type="text"
+              placeholder="パスワードを入力してください"
               name="password"
               onChange={(e) => handleChange(e)}
             />
           </div>
           <p className="errorMsg">{formErrors.password}</p>
-          <div className= "Button">
-            <button className="submitButton">新規登録</button>
-            <button className="loginButton">ログイン</button>
+          <div className="Button">
+            <button className="submitButton" onClick={handleSignup}>
+              新規登録
+            </button>
+            <button className="loginButton" onClick={handleLogin}>
+              ログイン
+            </button>
           </div>
           <div>
-            {Object.keys(formErrors).length === 0 && isSubmit &&
-            (
+            {Object.keys(formErrors).length === 0 && isSubmit && (
               <div className="msgOK">ログインに成功しました</div>
             )}
           </div>
