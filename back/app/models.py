@@ -18,7 +18,7 @@ from sqlalchemy.sql import func
 # .envファイルを呼び出す
 load_dotenv('/back/.env')
 # .envファイル内のソルト値を変数に代入
-SALT = os.getenv('SALT')
+PEPPER = os.getenv('PEPPER')
 
 ## load_user関数
 # デコレーターがFlask_loginライブラリで使用される。ログインマネージャーに関数を登録し、この関数で指定されたユーザーIDに対応するユーザーオブジェクトを返す役割を持つ
@@ -47,11 +47,11 @@ class User(UserMixin, db.Model):
         self.mail_address = mail_address
         self.user_name = user_name
         # 入力したパスワードとソルト値を組み合わせたものをハッシュ化する
-        self.password = generate_password_hash(password + SALT)
+        self.password = generate_password_hash(password + PEPPER)
 
     # パスワードにソルト値を足してハッシュ化したものと、パスワードにソルト値を足したものを比べ判定している
     def validate_password(self, password):
-        password = password + SALT
+        password = password + PEPPER
         return check_password_hash(self.password, password)
 
     # メールアドレスが一意なのかをquery.filter_byメソッドで検索し、一番最初のメールアドレスを取得している。
