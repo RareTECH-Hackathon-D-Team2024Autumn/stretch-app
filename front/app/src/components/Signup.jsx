@@ -22,7 +22,6 @@ export default function Signup() {
       <div className="formContainer">
         <form action="submit" methods="">
           <h1>ほぐし〜の</h1>
-          <hr></hr>
           <div className="uiForm">
             <div className="formField">
               <label htmlFor="username">ユーザー名</label>
