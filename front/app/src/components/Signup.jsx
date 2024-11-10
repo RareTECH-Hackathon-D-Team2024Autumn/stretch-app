@@ -1,7 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import "../styles/Signup.css";
+import { useState } from "react";
 
 export default function Signup() {
+  const initialValues = { username: "", email: "", password: "" };
+  const [formValues, setFormValues] = useState(initialValues);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
+  };
+
   // ルーティング設定
   const navigate = useNavigate();
   const handleRegister = () => {
@@ -22,6 +31,7 @@ export default function Signup() {
                 type="text"
                 placeholder="ユーザー名を入力"
                 name="username"
+                onChange={(e) => handleChange(e)}
               ></input>
             </div>
             <div className="formField">
@@ -31,6 +41,7 @@ export default function Signup() {
                 type="text"
                 placeholder="メールアドレスを入力"
                 name="email"
+                onChange={(e) => handleChange(e)}
               ></input>
             </div>
             <div className="formField">
@@ -40,6 +51,7 @@ export default function Signup() {
                 type="password"
                 placeholder="パスワードを入力"
                 name="password"
+                onChange={(e) => handleChange(e)}
               ></input>
             </div>
             <button className="submitButton" onClick={handleRegister}>
