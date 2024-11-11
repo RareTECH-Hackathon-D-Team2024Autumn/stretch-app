@@ -132,7 +132,7 @@ node_modulesを除外
 
    docker compose build
 
-3. Dockerコンテナ内でReactプロジェクトを作成
+3. Dockerコンテナ内でパッケージのインストール
 
    docker compose run --rm node sh -c "cd app && npm install"
 
