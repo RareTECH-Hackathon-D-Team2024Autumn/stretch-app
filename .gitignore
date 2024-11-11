@@ -3,3 +3,4 @@
 .env.dev
 .env
 /front/node_modules
+/back/app/migrations
