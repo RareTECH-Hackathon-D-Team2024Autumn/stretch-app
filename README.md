@@ -168,9 +168,6 @@ http://localhost:5001 にアクセスできるか確認
 http://localhost:3000 にアクセスできるか確認
 アクセスできたら成功
 
-バックエンド（flask）起動方法
-/back/app/.env_exampleに記載
-
 データベース
 1. stretch-appディレクトリにて、docker compose up -d の実行
 
@@ -187,6 +184,9 @@ http://localhost:3000 にアクセスできるか確認
 以下のコマンドでコンテナを停止することができます
 
 docker compose stop
+
+### バックエンド（flask）起動方法
+./.env_exampleに記載
 
 ### 環境変数の一覧
 
