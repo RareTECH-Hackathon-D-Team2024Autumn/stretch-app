@@ -187,10 +187,25 @@ docker compose stop
 | MYSQL_HOST             | MySQL のホスト名（Docker で使用）         | db                                 |                                          |
 
 
+## API仕様書
+
+[Swagger](https://swagger.io/)を使ってAPIの仕様を定義
+
+### 確認方法
+
+1. VS Codeの拡張機能[Swagger Viewer](https://marketplace.visualstudio.com/items?itemName=Arjun.swagger-viewer)をインストール
+
+2. VS CodeのPreview In Browserを有効にする
+
+3. 「Shift」+「Cmd」+「P」でコマンドパレットを開きPreView Swaggerを入力、選択するとブラウザでViewerが立ち上がり、API仕様が確認可能
+
+詳細は参考記事を参照
+
 ## トラブルシューティング
 
 ## README参考記事
-[全プロジェクトで重宝されるイケてるREADMEを作成しよう！](https://qiita.com/shun198/items/c983c713452c041ef787)
 
+[全プロジェクトで重宝されるイケてるREADMEを作成しよう！](https://qiita.com/shun198/items/c983c713452c041ef787)
+[OpenAPI・Swaggerでインタラクティブな API 仕様ドキュメントを作成する](https://zenn.dev/knm/articles/32106f623bd382)
 
 <p align="right">(<a href="#top">トップへ</a>)</p>
