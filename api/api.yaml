@@ -14,7 +14,7 @@ servers:
     description: "開発環境サーバ(バックエンド)"
 
 paths:
-  "/signup":
+  "/register":
     post:
       summary: "新規登録"
       description: "ユーザを新規登録する"
