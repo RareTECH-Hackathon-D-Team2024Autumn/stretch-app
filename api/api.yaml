@@ -45,6 +45,38 @@ paths:
           description: "新規登録成功"
         "400": # Bad Request
           description: "不正なリクエスト"
+
+  "/login":
+    post:
+      summary: "ログイン"
+      description: "ログイン機能"
+      deprecated: false # 廃止されたAPIかどうか。trueにするとグレーアウトされた表示になり廃止済であることを明示できる
+      tags: ["users"]
+      requestBody:
+        required: true # ボディが必須
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mail_address:
+                  type: string
+                  description: "メールアドレス"
+                password:
+                  type: string
+                  description: "パスワード"
+            example:
+              user_name: "田中太郎"
+              mail_address: "example@gmail.com"
+              password: "password12345"
+      responses:
+        "200": # OK
+          description: "ログイン成功"
+        "400": # Bad Request
+          description: "不正なリクエスト"
+        "403": # Forbidden
+          description: "認可エラー"
+
   "/videoes":
     get:
       summary: "動画の取得"
