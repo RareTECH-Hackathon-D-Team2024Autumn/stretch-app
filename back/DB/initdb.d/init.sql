@@ -1,10 +1,10 @@
 -- データベースの初期化
-DROP DATABASE IF EXISTS test;
+DROP DATABASE IF EXISTS hogushi_no;
 -- データベースの作成
-CREATE DATABASE  test COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE  hogushi_no COLLATE utf8mb4_unicode_ci;
 
 -- データベースの使用
-USE test;
+USE hogushi_no;
 
 -- usersテーブルの作成
 CREATE TABLE IF NOT EXISTS users(
@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS users(
 CREATE TABLE IF NOT EXISTS youtube_videoes(
     id INT PRIMARY KEY NOT NULL,
     item VARCHAR(1000) NOT NULL,
+    title VARCHAR(100), NOT NULL,
     url VARCHAR(100) NOT NULL,
     thumbnail VARCHAR(100) NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
