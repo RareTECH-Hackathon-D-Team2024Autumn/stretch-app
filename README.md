@@ -204,7 +204,7 @@ docker compose stop
 
 1. VS Codeの拡張機能[Swagger Viewer](https://marketplace.visualstudio.com/items?itemName=Arjun.swagger-viewer)をインストール
 
-2. VS CodeのPreview In Browserを有効にする
+2. VS Codeの設定から「Preview In Browser」を検索し、確認後有効にする
 
 3. 「Shift」+「Cmd」+「P」でコマンドパレットを開きPreView Swaggerを入力、選択するとブラウザでViewerが立ち上がり、API仕様が確認可能
 
