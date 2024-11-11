@@ -67,6 +67,10 @@ node_modulesを除外
 ```plaintext
 .
 ├── README.md
+├── .env
+├── .gitignore
+├── api
+│   ├──compose.yaml
 ├── back
 │   ├── DB
 │   │   ├── Dockerfile
@@ -97,8 +101,13 @@ node_modulesを除外
 │       │   ├── manifest.json
 │       │   └── robots.txt
 │       └── src
-│           ├── App.css
-│           ├── App.js
+│           ├── components
+│           │   ├── Login.jsx
+│           │   ├── Signup.jsx
+│           ├── styles
+│           │   ├── Login.css
+│           │   ├── Signup.css
+│           ├── App.jsx
 │           ├── App.test.js
 │           ├── index.css
 │           ├── index.js
