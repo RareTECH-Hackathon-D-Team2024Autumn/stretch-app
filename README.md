@@ -71,6 +71,10 @@ node_modulesを除外
 ├── .gitignore
 ├── api
 │   ├──compose.yaml
+├── .env
+├── .gitignore
+├── api
+│   ├──compose.yaml
 ├── back
 │   ├── DB
 │   │   ├── Dockerfile
@@ -108,6 +112,13 @@ node_modulesを除外
 │           │   ├── Login.css
 │           │   ├── Signup.css
 │           ├── App.jsx
+│           ├── components
+│           │   ├── Login.jsx
+│           │   ├── Signup.jsx
+│           ├── styles
+│           │   ├── Login.css
+│           │   ├── Signup.css
+│           ├── App.jsx
 │           ├── App.test.js
 │           ├── index.css
 │           ├── index.js
@@ -132,6 +143,7 @@ node_modulesを除外
 
    docker compose build
 
+3. Dockerコンテナ内でパッケージのインストール
 3. Dockerコンテナ内でパッケージのインストール
 
    docker compose run --rm node sh -c "cd app && npm install"
@@ -168,6 +180,9 @@ http://localhost:5001 にアクセスできるか確認
 http://localhost:3000 にアクセスできるか確認
 アクセスできたら成功
 
+バックエンド（flask）起動方法
+/back/app/.env_exampleに記載
+
 データベース
 1. stretch-appディレクトリにて、docker compose up -d の実行
 
@@ -197,15 +212,24 @@ docker compose stop
 | MYSQL_USER             | MySQL のユーザ名（Docker で使用）         | user                               |                                          |
 | MYSQL_PASSWORD         | MySQL のパスワード（Docker で使用）       | password                           |                                          |
 | MYSQL_HOST             | MySQL のホスト名（Docker で使用）         | db                                 |                                          |
-| SECRET_KEY             | シークレットキー(flask で使用)　　　　　　　 | 任意のシークレットキー（例：test）       | back/app/__init__.pyで使用　　　　　　　　　 |
-| DB_USER                |　MySQL にログインするユーザー名（flask で使用）| 任意のMySQLのユーザー名（例：test）　　| back/app/__init__.pyで使用                |
-| PASSWORD               |　MySQL にログインするユーザーのパスワード（flask で使用）| 任意のMySQLユーザーのパスワード（例：test）　| back/app/__init__.pyで使用   |
-| DB_HOST                |　Dockerの MySQLコンテナホスト名（flaskで使用）| db　　　　　　　　　　　　            | back/app/__init__.pyで使用                |
-| DB_NAME                |　使用するDB名                             | 任意のDB名（例：test）　　　　　　　　　 | back/app/__init__.pyで使用                |
-| DEBUG                  |　デバック機能を有効化（flaskで使用）          | True                               | back/app/app.pyで使用                     |
-| DEBUG_NULL             |　デバック機能を無効化（flaskで使用）          | False                              | back/app/app.pyで使用                     |
-| HOST                   |　起動アドレス番号                           | 0.0.0.0                            | back/app/app.pyで使用                     |
-| PORT                   |　起動ポート番号                             | 5000                               | back/app/app.pyで使用                     |
+| SECRET_KEY             | シークレットキー(flask で使用)　　　　　　　 |           |
+任意のシークレットキー（例：test）      | back/app/__init__.pyで使用
+| DB_USER                |　MySQL にログインするユーザー名（flask で使用）|         |
+任意のMySQLのユーザー名（例：test）　　　| back/app/__init__.pyで使用
+| PASSWORD               |　MySQL にログインするユーザーのパスワード（flask で使用）| |
+任意のMySQLユーザーのパスワード（例：test）　| back/app/__init__.pyで使用
+| DB_HOST                |　Dockerの MySQLコンテナホスト名（flaskで使用）|          |
+db　　　　　　　　　　　　　　　　　　　　 | back/app/__init__.pyで使用
+| DB_NAME                |　使用するDB名                             |           |
+任意のDB名（例：test）　　　　　　　　　　 | back/app/__init__.pyで使用
+| DEBUG                  |　デバック機能を有効化（flaskで使用）          |          |
+True                                 | back/app/app.pyで使用
+| DEBUG_NULL             |　デバック機能を無効化（flaskで使用）          |          |
+False                                | back/app/app.pyで使用
+| HOST                   |　起動アドレス番号                           |          |
+0.0.0.0                              | back/app/app.pyで使用
+| PORT                   |　起動ポート番号                             |          |
+5000                                 | back/app/app.pyで使用
 ## API仕様書
 
 [Swagger](https://swagger.io/)を使ってAPIの仕様を定義
@@ -224,7 +248,9 @@ docker compose stop
 
 ## README参考記事
 
+
 [全プロジェクトで重宝されるイケてるREADMEを作成しよう！](https://qiita.com/shun198/items/c983c713452c041ef787)
+[OpenAPI・Swaggerでインタラクティブな API 仕様ドキュメントを作成する](https://zenn.dev/knm/articles/32106f623bd382)
 [OpenAPI・Swaggerでインタラクティブな API 仕様ドキュメントを作成する](https://zenn.dev/knm/articles/32106f623bd382)
 
 <p align="right">(<a href="#top">トップへ</a>)</p>
