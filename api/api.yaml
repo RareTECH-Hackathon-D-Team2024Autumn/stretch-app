@@ -14,6 +14,37 @@ servers:
     description: "開発環境サーバ(バックエンド)"
 
 paths:
+  "/signup":
+    post:
+      summary: "新規登録"
+      description: "ユーザを新規登録する"
+      deprecated: false # 廃止されたAPIかどうか。trueにするとグレーアウトされた表示になり廃止済であることを明示できる
+      tags: ["users"]
+      requestBody:
+        required: true # ボディが必須
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_name: #プロパティ名を記述
+                  type: string
+                  description: "ユーザ名"
+                mail_address:
+                  type: string
+                  description: "メールアドレス"
+                password:
+                  type: string
+                  description: "パスワード"
+            example:
+              user_name: "田中太郎"
+              mail_address: "example@gmail.com"
+              password: "password12345"
+      responses:
+        "201": # Created
+          description: "新規登録成功"
+        "400": # Bad Request
+          description: "不正なリクエスト"
   "/videoes":
     get:
       summary: "動画の取得"
