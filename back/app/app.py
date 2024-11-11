@@ -1,15 +1,13 @@
-from flask import Flask
+from app import create_app
+from dotenv import load_dotenv
+import os
 
-app = Flask(__name__)
+load_dotenv()
+DEBUG = os.getenv('DEBUG')
+HOST = os.getenv('HOST')
+PORT = os.getenv('PORT')
 
-@app.route('/')
-def hello_flask():
-    return 'Hello Flask!'
+flask_stretch_app = create_app()
 
-
-# @app.route('/')
-# def index():
-#     return render_template('index.html')
-
-# if __name__ == '__main__':
-#     app.run()
+if __name__ == '__main__':
+    flask_stretch_app.run(host=HOST, port=PORT)
