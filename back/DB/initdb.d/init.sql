@@ -1,5 +1,6 @@
 -- データベースの初期化
 DROP DATABASE IF EXISTS hogushi_no;
+
 -- データベースの作成
 CREATE DATABASE  hogushi_no COLLATE utf8mb4_unicode_ci;
 
