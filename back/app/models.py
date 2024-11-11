@@ -38,7 +38,7 @@ class User(UserMixin, db.Model):
     __tablename__ = 'users'
 
     # カラム定義
-    id = db.Column(db.Integer, primary_key=True, nullable=False,)
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
     # user_nameとmail_addressは検索を早くするためにindex=Trueの追加
     user_name = db.Column(db.String(30), index=True, nullable=False)
     mail_address = db.Column(db.String(256), unique=True, index=True, nullable=False)
@@ -71,12 +71,11 @@ class YouTube(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     # user_nameとmail_addressは検索を早くするためにindex=Trueの追加
     item = db.Column(db.String(1000), nullable=False)
+    title = db.Column(db.String(100), nullable=False)
     url = db.Column(db.String(100), nullable=False)
     thumbnail = db.Column(db.String(100), nullable=False)
     # DateTimeのデフォルト値をユーザー作成時のサーバーの時刻とする
     created_at = db.Column(db.DateTime, server_default=func.now())
-     # DateTimeのデフォルト値をユーザー作成時のサーバーの時刻とする
-    updated_at = db.Column(db.DateTime, server_default=func.now())
     videoes = relationship('Top', backref='YouTube')
 
 
@@ -92,5 +91,7 @@ class Top(UserMixin, db.Model):
     my_favorite = db.Column(db.Boolean, default=False, nullable=False)
     # DateTimeのデフォルト値をユーザー作成時のサーバーの時刻とする
     created_at = db.Column(db.DateTime, server_default=func.now())
+    # DateTimeのデフォルト値をユーザー作成時のサーバーの時刻とする
+    updated_at = db.Column(db.DateTime, server_default=func.now())
 
 
