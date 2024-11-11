@@ -185,6 +185,9 @@ http://localhost:3000 にアクセスできるか確認
 
 docker compose stop
 
+### バックエンド（flask）起動方法
+./.env_exampleに記載
+
 ### 環境変数の一覧
 
 | 変数名                 | 役割                                      | デフォルト値                       | DEV 環境での値                           |
@@ -194,7 +197,28 @@ docker compose stop
 | MYSQL_USER             | MySQL のユーザ名（Docker で使用）         | user                               |                                          |
 | MYSQL_PASSWORD         | MySQL のパスワード（Docker で使用）       | password                           |                                          |
 | MYSQL_HOST             | MySQL のホスト名（Docker で使用）         | db                                 |                                          |
+| SECRET_KEY             | シークレットキー(flask で使用)　　　　　　　 | 任意のシークレットキー（例：test）       | back/app/__init__.pyで使用　　　　　　　　　 |
+| DB_USER                |　MySQL にログインするユーザー名（flask で使用）| 任意のMySQLのユーザー名（例：test）　　| back/app/__init__.pyで使用                |
+| PASSWORD               |　MySQL にログインするユーザーのパスワード（flask で使用）| 任意のMySQLユーザーのパスワード（例：test）　| back/app/__init__.pyで使用   |
+| DB_HOST                |　Dockerの MySQLコンテナホスト名（flaskで使用）| db　　　　　　　　　　　　            | back/app/__init__.pyで使用                |
+| DB_NAME                |　使用するDB名                             | 任意のDB名（例：test）　　　　　　　　　 | back/app/__init__.pyで使用                |
+| DEBUG                  |　デバック機能を有効化（flaskで使用）          | True                               | back/app/app.pyで使用                     |
+| DEBUG_NULL             |　デバック機能を無効化（flaskで使用）          | False                              | back/app/app.pyで使用                     |
+| HOST                   |　起動アドレス番号                           | 0.0.0.0                            | back/app/app.pyで使用                     |
+| PORT                   |　起動ポート番号                             | 5000                               | back/app/app.pyで使用                     |
+## API仕様書
 
+[Swagger](https://swagger.io/)を使ってAPIの仕様を定義
+
+### 確認方法
+
+1. VS Codeの拡張機能[Swagger Viewer](https://marketplace.visualstudio.com/items?itemName=Arjun.swagger-viewer)をインストール
+
+2. VS CodeのPreview In Browserを有効にする
+
+3. 「Shift」+「Cmd」+「P」でコマンドパレットを開きPreView Swaggerを入力、選択するとブラウザでViewerが立ち上がり、API仕様が確認可能
+
+詳細は参考記事を参照
 
 ## API仕様書
 

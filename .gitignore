@@ -3,4 +3,8 @@
 .env.dev
 .env
 /front/node_modules
+/back/app/static
+/back/app/templates
+/back/requrement.txt
+/debug_text
 /back/app/migrations
