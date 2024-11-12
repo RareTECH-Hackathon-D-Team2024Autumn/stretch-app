@@ -8,11 +8,9 @@ function Login() {
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
 
-  const handleChange = (e) => {
-    //
-    const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
-    console.log(formValues);
+  const handleChange = (e) => { 
+    const { name, value } =e.target;
+    setFormValues({...formValues,[name]:value});
   };
 
   const handleSubmit = (e) => {
