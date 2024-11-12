@@ -1,0 +1,107 @@
+openapi: "3.0.3"
+
+info:
+  title: "ほぐし〜の"
+  version: "1.0.0"
+  description: |
+    RareTECH ハッカソン2024秋  
+    YouTubeからストレッチのURLを取得することで運動を促すアプリケーション
+
+servers:
+  - url: http://localhost:3000
+    description: "開発環境サーバ(フロントエンド)"
+  - url: http://localhost:5001
+    description: "開発環境サーバ(バックエンド)"
+
+paths:
+  "/register":
+    post:
+      summary: "新規登録"
+      description: "ユーザを新規登録する"
+      deprecated: false # 廃止されたAPIかどうか。trueにするとグレーアウトされた表示になり廃止済であることを明示できる
+      tags: ["users"]
+      requestBody:
+        required: true # ボディが必須
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_name: #プロパティ名を記述
+                  type: string
+                  description: "ユーザ名"
+                mail_address:
+                  type: string
+                  description: "メールアドレス"
+                password:
+                  type: string
+                  description: "パスワード"
+            example:
+              user_name: "田中太郎"
+              mail_address: "example@gmail.com"
+              password: "password12345"
+      responses:
+        "201": # Created
+          description: "新規登録成功"
+        "400": # Bad Request
+          description: "不正なリクエスト"
+
+  "/login":
+    post:
+      summary: "ログイン"
+      description: "ログイン機能"
+      deprecated: false # 廃止されたAPIかどうか。trueにするとグレーアウトされた表示になり廃止済であることを明示できる
+      tags: ["users"]
+      requestBody:
+        required: true # ボディが必須
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mail_address:
+                  type: string
+                  description: "メールアドレス"
+                password:
+                  type: string
+                  description: "パスワード"
+            example:
+              user_name: "田中太郎"
+              mail_address: "example@gmail.com"
+              password: "password12345"
+      responses:
+        "200": # OK
+          description: "ログイン成功"
+        "400": # Bad Request
+          description: "不正なリクエスト"
+        "403": # Forbidden
+          description: "認可エラー"
+
+  "/videoes":
+    get:
+      summary: "動画の取得"
+      description: "YouTubeの動画情報を返す"
+      deprecated: false # 廃止されたAPIかどうか。trueにするとグレーアウトされた表示になり廃止済であることを明示できる
+      tags: ["items"]
+      responses:
+        "200":
+          description: "取得成功"
+          content: #レスポンスデータの定義
+            application/json:
+              schema:
+                type: array
+                example:
+                  - id: "1"
+                    item: "動画情報1"
+                    title: "睡眠の質アップ⁉寝る前の5分間ストレッチ【K-Fit】【ストレッチ】【寝る前】【睡眠】"
+                    url: "https://www.youtube.com/watch?v=vg-W7C3j_K8&ab_channel=K-Fit%E3%83%81%E3%83%A3%E3%83%B3%E3%83%8D%E3%83%AB%28%E6%97%A7%E3%81%8B%E3%81%9A%E6%95%B4%E5%BD%A2%E5%A4%96%E7%A7%91%E3%82%AF%E3%83%AA%E3%83%8B%E3%83%83%E3%82%AF%E3%83%81%E3%83%A3%E3%83%B3%E3%83%8D%E3%83%AB%29"
+                  - id: "2"
+                    item: "動画情報2"
+                    title: "【腰痛軽減】2分間の腰伸ばしストレッチ（キャットアンドドッグ、姿勢改善）"
+                    url: "https://www.youtube.com/watch?v=eQ03wzDG0wo&ab_channel=JuntendoUniversity%E9%A0%86%E5%A4%A9%E5%A0%82%E5%A4%A7%E5%AD%A6"
+        "400": # Bad Request
+          description: "不正なリクエスト"
+        "403": # Forbidden
+          description: "閲覧権限がない"
+        "404": # Not Found
+          description: "Webページが見つからない"
