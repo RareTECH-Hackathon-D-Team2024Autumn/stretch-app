@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles/Top.css";
 import Header from "./Header";
+import Footer from "./Footer";
 
 function Top() {
   return (
@@ -34,9 +35,7 @@ function Top() {
           </div>
         </div>
       </main>
-      <footer className="footer">
-        <button className="footer-button">お気に入り一覧へ</button>
-      </footer>
+      <Footer />
     </>
   );
 }
