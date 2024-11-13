@@ -1,15 +1,11 @@
 import React from "react";
 import "../styles/Top.css";
+import Header from "./Header";
 
 function Top() {
   return (
     <>
-      <header className="header">
-        <div className="top-page">Topページ</div>
-        <div>
-          <button className="align-button">ユーザー情報</button>
-        </div>
-      </header>
+      <Header />
       <main className="maincontainer">
         <div>
           <div className="favoritecontainer">
