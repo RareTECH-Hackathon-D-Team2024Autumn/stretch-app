@@ -1,16 +1,12 @@
-import React from 'react';
-import Yturl from './Yturl';
+import React from "react";
 import "../styles/Top.css";
+import Header from "./Header";
+import Footer from "./Footer";
 
 export default function Top() {
   return (
     <>
-      <header className="header">
-        <div className="top-page">Topページ</div>
-        <div>
-          <button className="align-button">ユーザー情報</button>
-        </div>
-      </header>
+      <Header />
       <main className="maincontainer">
         <div>
           <div className="favoritecontainer">
@@ -24,9 +20,7 @@ export default function Top() {
           </div>
         </div>
       </main>
-      <footer className="footer">
-        <button className="footer-button">お気に入り一覧へ</button>
-      </footer>
+      <Footer />
     </>
   );
 }
