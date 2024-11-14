@@ -1,5 +1,31 @@
+import { useState } from "react";
 import Header from "./Header";
+
 export default function UserEdit() {
+  const [isUserNameEdit, setIsUserNameEdit] = useState(false);
+  const handleUserNameEditClick = () => {
+    if (!isUserNameEdit) {
+      setIsUserNameEdit(true);
+    } else {
+      setIsUserNameEdit(false);
+    }
+  };
+  const [isEmailEdit, setIsEmailEdit] = useState(false);
+  const handleEmailEditClick = () => {
+    if (!isEmailEdit) {
+      setIsEmailEdit(true);
+    } else {
+      setIsEmailEdit(false);
+    }
+  };
+  const [isPasswordEdit, setIsPasswordEdit] = useState(false);
+  const handlePasswordEditClick = () => {
+    if (!isPasswordEdit) {
+      setIsPasswordEdit(true);
+    } else {
+      setIsPasswordEdit(false);
+    }
+  };
   return (
     <>
       <Header />
@@ -9,27 +35,27 @@ export default function UserEdit() {
           name="username"
           type="text"
           placeholder="ユーザー名"
-          disabled
+          disabled={!isUserNameEdit}
         ></input>
-        <button>編集</button>
+        <button onClick={handleUserNameEditClick}>編集</button>
       </div>
       <div>
         <input
           name="email"
           type="text"
           placeholder="メールアドレス"
-          disabled
+          disabled={isEmailEdit}
         ></input>
-        <button>編集</button>
+        <button onClick={handleEmailEditClick}>編集</button>
       </div>
       <div>
         <input
           name="パスワード"
           type="password"
           placeholder="パスワード"
-          disabled
+          disabled={!isPasswordEdit}
         ></input>
-        <button>編集</button>
+        <button onClick={handlePasswordEditClick}>編集</button>
       </div>
     </>
   );
