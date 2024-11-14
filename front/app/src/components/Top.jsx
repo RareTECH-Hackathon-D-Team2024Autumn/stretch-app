@@ -1,4 +1,5 @@
 import React from 'react';
+import Yturl from './Yturl';
 import "../styles/Top.css";
 
 function Top() {
@@ -15,23 +16,8 @@ function Top() {
           <div className="favoritecontainer">
             <p className="favoritecheck">お気に入り</p>
           </div>
-          <div className="urlcontainer">
-            <a href="https://www.youtube.com/">ここに動画のURL情報が載る</a>
-          </div>
-          <div className="urlcontainer">
-            <a href="https://www.youtube.com/">ここに動画のURL情報が載る</a>
-          </div>
-          <div className="urlcontainer">
-            <a href="https://www.youtube.com/">ここに動画のURL情報が載る</a>
-          </div>
-          <div className="urlcontainer">
-            <a href="https://www.youtube.com/">ここに動画のURL情報が載る</a>
-          </div>
-          <div className="urlcontainer">
-            <a href="https://www.youtube.com/">ここに動画のURL情報が載る</a>
-          </div>
-          <div className="urlcontainer">
-            <a href="https://www.youtube.com/">ここに動画のURL情報が載る</a>
+          <div>
+            <Yturl/>
           </div>
           <div className="urlcontainer">
             <a href="https://www.youtube.com/">ここに動画のURL情報が載る</a>
