@@ -2,7 +2,7 @@ import { useState } from "react";
 import "../styles/Login.css";
 import { useNavigate } from "react-router-dom";
 
-function Login() {
+export default function Login() {
   const initialValues = { mailAddress: "", password: "" };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
@@ -94,5 +94,3 @@ function Login() {
     </div>
   );
 }
-
-export default Login;

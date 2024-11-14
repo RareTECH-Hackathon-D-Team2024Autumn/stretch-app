@@ -1,9 +1,7 @@
 import React from 'react'
 
-const Yturl = () => {
+export default function Yturl () {
   return (
     <div>ここに動画のURL情報が載る</div>
   )
 }
-
-export default Yturl

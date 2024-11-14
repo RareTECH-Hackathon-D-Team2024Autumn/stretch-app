@@ -2,7 +2,7 @@ import React from 'react';
 import Yturl from './Yturl';
 import "../styles/Top.css";
 
-function Top() {
+export default function Top() {
   return (
     <>
       <header className="header">
@@ -31,4 +31,4 @@ function Top() {
   );
 }
 
-export default Top;
+
