@@ -31,6 +31,7 @@ export default function UserEdit() {
     <>
       <Header />
       <div>編集したい項目の編集ボタンを押して保存で編集ができます</div>
+
       <div>
         <input
           name="username"
@@ -58,6 +59,8 @@ export default function UserEdit() {
         ></input>
         <button onClick={handlePasswordEditClick}>編集</button>
       </div>
+
+      <button className="logoutButton">ログアウト</button>
       <button className="unsubscribeButton">退会</button>
       <button className="saveButton">保存</button>
     </>
