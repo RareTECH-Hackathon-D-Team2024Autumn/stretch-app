@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Header from "./Header";
 import "../styles/UserEdit.css";
+import { useNavigate } from "react-router-dom";
 
 export default function UserEdit() {
   const [isUserNameEdit, setIsUserNameEdit] = useState(false);
@@ -26,6 +27,12 @@ export default function UserEdit() {
     } else {
       setIsPasswordEdit(false);
     }
+  };
+
+  // ルーティング
+  const navigate = useNavigate();
+  const handleLogoutClick = () => {
+    navigate("/");
   };
   return (
     <>
@@ -60,7 +67,9 @@ export default function UserEdit() {
         <button onClick={handlePasswordEditClick}>編集</button>
       </div>
 
-      <button className="logoutButton">ログアウト</button>
+      <button className="logoutButton" onClick={handleLogoutClick}>
+        ログアウト
+      </button>
       <button className="unsubscribeButton">退会</button>
       <button className="saveButton">保存</button>
     </>
