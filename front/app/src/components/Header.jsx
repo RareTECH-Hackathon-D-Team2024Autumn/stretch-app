@@ -5,10 +5,16 @@ export default function Header() {
   const handleUserEdit = () => {
     navigate("/UserEdit");
   };
+  const handleTop = () => {
+    navigate("/top");
+  };
+
   return (
     <>
       <header className="header">
-        <div className="top-page">Topページ</div>
+        <div className="top-page" onClick={handleTop}>
+          Topページ
+        </div>
         <div>
           <button className="align-button" onClick={handleUserEdit}>
             ユーザー情報
