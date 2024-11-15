@@ -1,0 +1,17 @@
+.saveButton {
+  color: #000000;
+  background-color: #89f4d7;
+}
+.saveButton:hover {
+  color: #000000;
+  background-color: #96f2da;
+}
+.unsubscribeButton {
+  color: #000000;
+  background-color: #ffe95d;
+}
+
+.unsubscribeButton:hover {
+  color: #000000;
+  background-color: #f5e15d;
+}

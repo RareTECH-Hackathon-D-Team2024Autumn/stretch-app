@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Header from "./Header";
+import "../styles/UserEdit.css";
 
 export default function UserEdit() {
   const [isUserNameEdit, setIsUserNameEdit] = useState(false);
@@ -57,6 +58,8 @@ export default function UserEdit() {
         ></input>
         <button onClick={handlePasswordEditClick}>編集</button>
       </div>
+      <button className="unsubscribeButton">退会</button>
+      <button className="saveButton">保存</button>
     </>
   );
 }
