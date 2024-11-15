@@ -6,6 +6,9 @@
   width: 10%;
   border-radius: 10px;
 }
+.logoutButton:hover {
+  background: #f7f7f7;
+}
 
 /* 保存ボタン */
 .saveButton {
