@@ -1,16 +1,30 @@
+/* 保存ボタン */
 .saveButton {
   color: #000000;
   background-color: #89f4d7;
+  width: 10%;
+  position: absolute; /* ボタンを絶対位置に設定 */
+  right: 10px; /* 左からの距離 */
+  bottom: 10px; /* 下からの距離 */
+  padding: 10px 20px; /* ボタンの内側の余白 */
+  border-radius: 10px;
 }
 .saveButton:hover {
   color: #000000;
   background-color: #96f2da;
 }
+
+/* 退会ボタン */
 .unsubscribeButton {
   color: #000000;
   background-color: #ffe95d;
+  width: 10%;
+  position: absolute; /* ボタンを絶対位置に設定 */
+  left: 10px; /* 左からの距離 */
+  bottom: 10px; /* 下からの距離 */
+  padding: 10px 20px; /* ボタンの内側の余白 */
+  border-radius: 10px;
 }
-
 .unsubscribeButton:hover {
   color: #000000;
   background-color: #f5e15d;
