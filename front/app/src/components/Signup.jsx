@@ -14,7 +14,7 @@ export default function Signup() {
   // ルーティング設定
   const navigate = useNavigate();
   const handleRegister = () => {
-    navigate("/top");
+    navigate("/Top");
   };
 
   return (

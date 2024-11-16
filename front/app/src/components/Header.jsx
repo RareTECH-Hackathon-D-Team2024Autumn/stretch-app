@@ -6,7 +6,7 @@ export default function Header() {
     navigate("/UserEdit");
   };
   const handleTop = () => {
-    navigate("/top");
+    navigate("/Top");
   };
 
   return (
