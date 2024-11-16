@@ -2,6 +2,7 @@ import React from "react";
 import "../styles/Top.css";
 import Header from "./Header";
 import Footer from "./Footer";
+import Yturl from "./Yturl";
 
 export default function Top() {
   return (
