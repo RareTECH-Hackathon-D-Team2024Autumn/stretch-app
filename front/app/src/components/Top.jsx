@@ -4,7 +4,8 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Yturl from "./Yturl";
 
-export default function Top() {
+export default function Top(props) {
+  
   return (
     <>
       <Header />
@@ -14,7 +15,7 @@ export default function Top() {
             <p className="favoritecheck">お気に入り</p>
           </div>
           <div>
-            <Yturl/>
+            <Yturl getAllYturlData={props.getAllYturlData} allYturlData={props.allYturlData}/>
           </div>
           <div className="urlcontainer">
             <a href="https://www.youtube.com/">ここに動画のURL情報が載る</a>
