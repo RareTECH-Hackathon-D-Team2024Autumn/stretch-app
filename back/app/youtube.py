@@ -12,14 +12,12 @@ YOUTUBE_API_SERVICE_NAME=os.getenv('YOUTUBE_API_SERVICE_NAME')
 YOUTUBE_API_VERSION=os.getenv('YOUTUBE_API_VERSION')
 SEARCH_TEXT=os.getenv('SEARCH_TEXT')
 SEARCH_TEXT=os.getenv('SEARCH_TEXT')
-part=os.getenv('part')
-type=os.getenv('type')
-part=os.getenv('part')
-type=os.getenv('type')
-videoDuration=os.getenv('videoDuration')
-maxResults=os.getenv('maxResults')
-order=os.getenv('order')
-regionCode=os.getenv('regionCode')
+PART=os.getenv('PART')
+TYPE=os.getenv('TYPE')
+VIDEO_DURATION=os.getenv('VIDEO_DURATION')
+MAX_RESULTS=os.getenv('MAX_RESULTS')
+ORDER=os.getenv('ORDER')
+REGION_CODE=os.getenv('REGION_CODE')
 
 # MySQLに接続
 conn = mysql.connector.connect(
@@ -44,12 +42,12 @@ youtube = build(
 
 response = youtube.search().list(
 q=SEARCH_TEXT,
-part=part,
-type=type,
-videoDuration=videoDuration,
-maxResults=maxResults,
-order=order,
-regionCode=regionCode
+part=PART,
+type=TYPE,
+videoDuration=VIDEO_DURATION,
+maxResults=MAX_RESULTS,
+order=ORDER,
+regionCode=REGION_CODE
 ).execute()
 
 idInfo = response['items'][0]['id']
