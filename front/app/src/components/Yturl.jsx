@@ -3,7 +3,6 @@ import React from 'react';
 export default function Yturl (props){
   return (
     <div>
-      <button onClick={props.getAllYturlData}>Get All URL</button>
       {props.allYturlData.map((singleData,index) => 
       <div key={index}>
         <h2>{singleData.title}</h2>
