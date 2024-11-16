@@ -39,10 +39,6 @@
     width: auto;
   }
   
-  .favoritecontainer {
-    text-align: center;
-  }
-  
   .favoritecheck {
     display: inline-block;
     margin-left: 300px;

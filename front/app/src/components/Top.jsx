@@ -11,12 +11,7 @@ export default function Top(props) {
       <Header />
       <main className="maincontainer">
         <div>
-          <div className="favoritecontainer">
-            <p className="favoritecheck">お気に入り</p>
-          </div>
-          <div>
             <Yturl allYturlData={props.allYturlData}/>
-          </div>
         </div>
       </main>
       <Footer />
