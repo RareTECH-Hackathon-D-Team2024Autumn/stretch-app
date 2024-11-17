@@ -4,11 +4,15 @@ import Signup from "./components/Signup";
 import Top from "./components/Top";
 import { useEffect, useState } from "react";
 
+
+
 export default function App() {
   const [allYturlData,setAllYturlData] = useState([]);
 
   useEffect(() =>{
-    fetch("https://a43d9cf5-d889-4ff7-8926-3963283fd8a4.mock.pstmn.io/stretch_app/videoes")
+    const topendpoint = process.env.REACT_APP_TOP_ENDPOINT;
+
+    fetch(topendpoint)
   .then(res => res.json()).then(data => setAllYturlData(data))
   },[]);
 
