@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-export default function Popup(props) {
+export default function Modal(props) {
   const navigate = useNavigate();
   const handleYesButton = () => {
     // TODO:アカウント削除機能が必要
@@ -9,13 +9,13 @@ export default function Popup(props) {
     navigate("/");
   };
   const handleNoButton = () => {
-    props.PopupBehavior.setPopupVisible(!props.PopupBehavior.isPopupVisible);
+    props.ModalOpen.setOpen(!props.ModalOpen.isOpen);
   };
   return (
     <>
       {console.log(props)}
-      {props.PopupBehavior.isPopupVisible && (
-        <div className="popup">
+      {props.ModalOpen.isOpen && (
+        <div>
           <p>本当に退会していいですか？</p>
           <button onClick={handleYesButton}>はい</button>
           <button onClick={handleNoButton}>いいえ</button>
