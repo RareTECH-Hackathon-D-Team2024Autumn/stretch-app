@@ -2,8 +2,14 @@ import { useState } from "react";
 import Header from "./Header";
 import "../styles/UserEdit.css";
 import { useNavigate } from "react-router-dom";
+import Popup from "./Popup";
 
 export default function UserEdit() {
+  const [isPopupVisible, setPopupVisible] = useState(false);
+  const handleUnsubscribeButton = () => {
+    setPopupVisible(!isPopupVisible);
+  };
+
   const [isUserNameEdit, setIsUserNameEdit] = useState(false);
   const handleUserNameEditClick = () => {
     if (!isUserNameEdit) {
@@ -37,6 +43,7 @@ export default function UserEdit() {
   return (
     <>
       <Header />
+      {<Popup PopupBehavior={{ isPopupVisible, setPopupVisible }} />}
       <div>編集したい項目の編集ボタンを押して保存で編集ができます</div>
 
       <div>
@@ -66,11 +73,12 @@ export default function UserEdit() {
         ></input>
         <button onClick={handlePasswordEditClick}>編集</button>
       </div>
-
       <button className="logoutButton" onClick={handleLogoutClick}>
         ログアウト
       </button>
-      <button className="unsubscribeButton">退会</button>
+      <button className="unsubscribeButton" onClick={handleUnsubscribeButton}>
+        退会
+      </button>
       <button className="saveButton">保存</button>
     </>
   );
