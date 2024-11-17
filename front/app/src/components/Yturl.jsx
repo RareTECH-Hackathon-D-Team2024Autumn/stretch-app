@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import "../styles/Yturl.css";
 
 export default function Yturl (props){
