@@ -10,9 +10,8 @@ export default function App() {
   const [allYturlData,setAllYturlData] = useState([]);
 
   useEffect(() =>{
-    const topendpoint = process.env.REACT_APP_TOP_ENDPOINT;
 
-    fetch(topendpoint)
+    fetch(process.env.REACT_APP_TOP_ENDPOINT)
   .then(res => res.json()).then(data => setAllYturlData(data))
   },[]);
 
