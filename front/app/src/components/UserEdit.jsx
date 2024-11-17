@@ -2,7 +2,7 @@ import { useState } from "react";
 import Header from "./Header";
 import "../styles/UserEdit.css";
 import { useNavigate } from "react-router-dom";
-import Popup from "./Popup";
+import Popup from "./Modal";
 
 export default function UserEdit() {
   const [isPopupVisible, setPopupVisible] = useState(false);
