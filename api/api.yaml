@@ -4,7 +4,7 @@ info:
   title: "ほぐし〜の"
   version: "1.0.0"
   description: |
-    RareTECH ハッカソン2024秋  
+    RareTECH ハッカソン2024秋
     YouTubeからストレッチのURLを取得することで運動を促すアプリケーション
 
 servers:
@@ -86,6 +86,12 @@ paths:
       responses:
         "200":
           description: "取得成功"
+        "400": # Bad Request
+          description: "不正なリクエスト"
+        "403": # Forbidden
+          description: "閲覧権限がない"
+        "404": # Not Found
+          description: "Webページが見つからない"
           content: #レスポンスデータの定義
             application/json:
               schema:
@@ -99,9 +105,106 @@ paths:
                     item: "動画情報2"
                     title: "【腰痛軽減】2分間の腰伸ばしストレッチ（キャットアンドドッグ、姿勢改善）"
                     url: "https://www.youtube.com/watch?v=eQ03wzDG0wo&ab_channel=JuntendoUniversity%E9%A0%86%E5%A4%A9%E5%A0%82%E5%A4%A7%E5%AD%A6"
+
+  "/favorite":
+    post:
+      summary: "お気に入り動画の登録"
+      description: "トップページでお気に入りボタンを押した動画情報を画面に登録する"
+      deprecated: false # 廃止されたAPIかどうか。trueにするとグレーアウトされた表示になり廃止済であることを明示できる
+      tags: ["items"]
+      responses:
+        "200":
+         description: "登録成功"
+        "400": # Bad Request
+         description: "不正なリクエスト"
+        "403": # Forbidden
+         description: "閲覧権限がない"
+        "404": # Not Found
+         description: "Webページが見つからない"
+         content: #レスポンスデータの定義
+            application/json:
+              schema:
+                type: array
+                example:
+                  - id: "1"
+                    title: "腰痛に効く簡単ストレッチ"
+                    url: "https://www.youtube.com/watch?v=aaaaaaaaaaa"
+                    thumbnail: "aaaaaa.jpeg"
+                  - id: "2"
+                    title: "首が固まったら行うストレッチ集"
+                    url: "https://www.youtube.com/watch?v=bbbbbbbbbbb"
+                    thumbnail: "gggggg.jpeg"
+    delete:
+      summary: "お気に入り動画を削除する"
+      responses:
+        "201":
+          description: "削除ボタンの押下で削除"
+          content:
+            application/json:
+              schema:
+                  type: array
+                  example:
+                    - id: "1"
+                      title: "腰痛に効く簡単ストレッチ"
+                      url: "https://www.youtube.com/watch?v=aaaaaaaaaaa"
+                      thumbnail: "aaaaaa.jpeg"
+                    - id: "2"
+                      title: "首が固まったら行うストレッチ集"
+                      url: "https://www.youtube.com/watch?v=bbbbbbbbbbb"
+                      thumbnail: "gggggg.jpeg"
         "400": # Bad Request
           description: "不正なリクエスト"
         "403": # Forbidden
           description: "閲覧権限がない"
         "404": # Not Found
           description: "Webページが見つからない"
+
+  "/login_edit":
+    post:
+      summary: "ユーザー編集"
+      description: "ユーザー情報を編集する"
+      deprecated: false # 廃止されたAPIかどうか。trueにするとグレーアウトされた表示になり廃止済であることを明示できる
+      tags: ["users"]
+      requestBody:
+        required: true # ボディが必須
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_name: #プロパティ名を記述
+                  type: string
+                  description: "ユーザ名"
+                mail_address:
+                  type: string
+                  description: "メールアドレス"
+                password:
+                  type: string
+                  description: "パスワード"
+      responses:
+          "201": # Created
+            description: "更新成功"
+          "400": # Bad Request
+            description: "不正なリクエスト"
+          "403": # Forbidden
+            description: "閲覧権限がない"
+          "404": # Not Found
+            description: "Webページが見つからない"
+
+  "/login_edit/logout":
+    get:
+      summary: "ログアウト"
+      description: "トップページからのログアウト"
+      deprecated: false # 廃止されたAPIかどうか。trueにするとグレーアウトされた表示になり廃止済であることを明示できる
+      tags: ["users"]
+      responses:
+          "200": # Created
+            description: "ログアウト"
+          "400": # Bad Request
+            description: "不正なリクエスト"
+          "403": # Forbidden
+            description: "閲覧権限がない"
+          "404": # Not Found
+            description: "Webページが見つからない"
+
+
