@@ -12,7 +12,7 @@
 }
 
 .modal-content {
-  background-color: white;
+  background-color: #ffe95d;
   padding: 20px;
   border-radius: 8px;
   position: relative;
@@ -36,4 +36,9 @@
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.2s;
+  color: black;
+  background-color: #89f4d7;
+}
+.modal-button:hover {
+  background-color: #89e4d5;
 }
