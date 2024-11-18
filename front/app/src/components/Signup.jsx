@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import "../styles/Signup.css";
 import { useState } from "react";
-// import axios from "axios";
+import axios from "axios";
 
 export default function Signup() {
   const initialValues = { user_name: "", mail_address: "", password: "" };
@@ -20,27 +20,27 @@ export default function Signup() {
     e.preventDefault(); // JSメソッド、フォームがデフォルトでリロードされるのを防止
 
     try{
-      const response = await fetch(`${process.env.REACT_APP_REGISTER_ENDPOINT}`,{
-        mode:"cors", //オリジン（プロトコル、ドメイン、ポート番号）の異なるリソースへのリクエストを可能にする。これでReactポート番号とFlaskのポート番号間でのやり取りが可能になる
-        method:"POST",
-        headers:{
-          "Content-Type":"application/json", //HTTPヘッダの一つでデータの形式を指定するのに使用。この場合リクエストのヘッダにはJSON形式のデータがあることを伝える
-        },
-        body:JSON.stringify(formValues), //入力データをJSONで格納
-        
-      });
-      if (!response.ok){
-        throw new Error(`HTTPステータスエラー：${response.status}`);
-      }
+      const response = await axios.post(`${process.env.REACT_APP_REGISTER_ENDPOINT}`,formValues,
+        {
+          headers:{
+          "Content-Type":"application/json", //HTTPヘッダの一つでデータの形式を指定するのに使用。この場合リクエストのヘッダにはJSON形式のデータがあることを伝える 
+          },
+        }
+      );
 
-      const data = await response.json(); //レスポンスのJSONを取得
-      console.log(data)
+      if (response.status !== 200){
+        throw new Error(`HTTPステータスエラー:${response.status}`);
+      }
+      
+      const data = response.data; //axiosではレスポンスデータはresponse.dataで取得できる
+      console.log(data);
       setResponseMessage(data.message || "登録されました！");
-      navigate("/top");
+
+      navigate("/top"); //Topページに遷移
     } catch (error){
       console.error("登録中にエラーが発生しました。：",error);
       setResponseMessage("登録中にエラーが発生しました。")
-    }    
+    }
   };
 
   return (
