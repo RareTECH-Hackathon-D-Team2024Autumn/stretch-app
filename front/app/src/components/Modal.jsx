@@ -1,3 +1,4 @@
+import "../styles/Modal.css";
 import { useNavigate } from "react-router-dom";
 
 export default function Modal(props) {
@@ -13,12 +14,19 @@ export default function Modal(props) {
   };
   return (
     <>
-      {console.log(props)}
       {props.ModalOpen.isOpen && (
-        <div>
-          <p>本当に退会していいですか？</p>
-          <button onClick={handleYesButton}>はい</button>
-          <button onClick={handleNoButton}>いいえ</button>
+        <div className="modal-overray">
+          <div className="modal-content">
+            本当に退会していいですか？
+            <div className="modal-buttons">
+              <button onClick={handleYesButton} className="modal-button">
+                はい
+              </button>
+              <button onClick={handleNoButton} className="modal-button">
+                いいえ
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </>
