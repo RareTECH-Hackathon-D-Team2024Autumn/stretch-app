@@ -22,7 +22,7 @@ from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
 
 # .envファイルを呼び出す
-load_dotenv('/back/.env')
+load_dotenv('/back/app/.env')
 # .envファイル内のペッパー値を変数に代入
 PEPPER = os.getenv('PEPPER')
 
