@@ -49,7 +49,7 @@ def create_app():
 
     ## 初期設定
     # 全てのオリジンからアクセスを許可
-    cors = CORS(app, resources={r"/*": {"origins": ["http://127.0.0.1:3000", "http://127.0.0.1:5001"]}})
+    CORS(app, resources={r"/*": {"origins": ["http://127.0.0.1:3000", "http://127.0.0.1:5001"]}})
     # view.pyで記述するBlueprintの設定（Blueprintのインポート）
     from .views import bp
     # FlaskアプリでBlueprintを使用できる様にしている
