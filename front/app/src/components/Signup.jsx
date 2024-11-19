@@ -27,16 +27,12 @@ export default function Signup() {
           },
         }
       );
-
-      if (response.status !== 200){
-        throw new Error(`HTTPステータスエラー:${response.status}`);
-      }
       
-      const data = response.data; //axiosではレスポンスデータはresponse.dataで取得できる
-      console.log(data);
-      setResponseMessage(data.message || "登録されました！");
+      console.log(response.data);  //axiosではレスポンスデータはresponse.dataで取得できる
+      setResponseMessage(response.data.message || "登録されました！");
 
       navigate("/top"); //Topページに遷移
+
     } catch (error){
       console.error("登録中にエラーが発生しました。：",error);
       setResponseMessage("登録中にエラーが発生しました。")
