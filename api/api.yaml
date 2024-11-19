@@ -127,31 +127,36 @@ paths:
                 type: array
                 example:
                   - id: "1"
-                    title: "腰痛に効く簡単ストレッチ"
-                    url: "https://www.youtube.com/watch?v=aaaaaaaaaaa"
-                    thumbnail: "aaaaaa.jpeg"
+                    item: "動画情報1"
+                    title: "睡眠の質アップ⁉寝る前の5分間ストレッチ【K-Fit】【ストレッチ】【寝る前】【睡眠】"
+                    url: "https://www.youtube.com/watch?v=vg-W7C3j_K8&ab_channel=K-Fit%E3%83%81%E3%83%A3%E3%83%B3%E3%83%8D%E3%83%AB%28%E6%97%A7%E3%81%8B%E3%81%9A%E6%95%B4%E5%BD%A2%E5%A4%96%E7%A7%91%E3%82%AF%E3%83%AA%E3%83%8B%E3%83%83%E3%82%AF%E3%83%81%E3%83%A3%E3%83%B3%E3%83%8D%E3%83%AB%29"
                   - id: "2"
-                    title: "首が固まったら行うストレッチ集"
-                    url: "https://www.youtube.com/watch?v=bbbbbbbbbbb"
-                    thumbnail: "gggggg.jpeg"
+                    item: "動画情報2"
+                    title: "【腰痛軽減】2分間の腰伸ばしストレッチ（キャットアンドドッグ、姿勢改善）"
+                    url: "https://www.youtube.com/watch?v=eQ03wzDG0wo&ab_channel=JuntendoUniversity%E9%A0%86%E5%A4%A9%E5%A0%82%E5%A4%A7%E5%AD%A6"
+
     delete:
+      tags:
+        - "items"
       summary: "お気に入り動画を削除する"
+      description: "削除ボタンの押下で削除"
+      parameters:
+       - name: "my_favorite"
+         in: "query"
+         description: "お気に入り動画を特定するDBのカラム"
+         required: true
+         type: "boolean"
       responses:
-        "201":
-          description: "削除ボタンの押下で削除"
-          content:
-            application/json:
-              schema:
-                  type: array
-                  example:
-                    - id: "1"
-                      title: "腰痛に効く簡単ストレッチ"
-                      url: "https://www.youtube.com/watch?v=aaaaaaaaaaa"
-                      thumbnail: "aaaaaa.jpeg"
-                    - id: "2"
-                      title: "首が固まったら行うストレッチ集"
-                      url: "https://www.youtube.com/watch?v=bbbbbbbbbbb"
-                      thumbnail: "gggggg.jpeg"
+        "200":
+            description: "削除完了"
+            content:
+              application/json:
+                schema:
+                  type: "object"
+                  properties:
+                    success:
+                      type: "string"
+                      example: "DELETED"
         "400": # Bad Request
           description: "不正なリクエスト"
         "403": # Forbidden
@@ -159,8 +164,8 @@ paths:
         "404": # Not Found
           description: "Webページが見つからない"
 
-  "/login_edit":
-    post:
+  "/login_edit/{user_id}":
+    put:
       summary: "ユーザー編集"
       description: "ユーザー情報を編集する"
       deprecated: false # 廃止されたAPIかどうか。trueにするとグレーアウトされた表示になり廃止済であることを明示できる
@@ -191,7 +196,7 @@ paths:
           "404": # Not Found
             description: "Webページが見つからない"
 
-  "/login_edit/logout":
+  "/logout":
     get:
       summary: "ログアウト"
       description: "トップページからのログアウト"
