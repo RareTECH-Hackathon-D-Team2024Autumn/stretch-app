@@ -1,5 +1,5 @@
 ## 必要なモジュールのインポート
-from flask import Blueprint, request, render_template, redirect, url_for, flash
+from flask import Blueprint, request, render_template, redirect, url_for, flash, jsonify
 from flask_login import login_user, login_required, logout_user, current_user
 from app.models import User
 from datetime import datetime, date
@@ -12,7 +12,7 @@ bp = Blueprint('stretch_app', __name__, url_prefix='')
 ## ログイン画面の表示
 @bp.route('/')
 def home():
-    return render_template('home.html') ## !ログイン画面のファイル名を追加! ##
+    return render_template('Login.jsx') ## !ログイン画面のファイル名を追加! ##
 
 ## ログアウト
 @bp.route('/logout')
@@ -46,21 +46,23 @@ def login():
 @bp.route('/register', methods=['GET', 'POST'])
 def register():
     # 書き込まれた項目を取得
-    user_name = request.form.get('user_name')
-    mail_address = request.form.get('mail_address')
-    password = request.form.get('password')
+    data = request.get_json()
+    user_name = data['user_name'] 
+    mail_address = data['mail_address']
+    password = data['password']
 
     # メールアドレスを正規表現で指定
     pattern = "^[a-zA-Z0-9_.%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9-.]{2,}+$"
-
     # POSTリクエスト
+    
     if request.method == 'POST':
         # 空欄がある場合
         if user_name == '' or mail_address == '' or password == '':
             # flashモジュールを使用した文字の表示
             flash('入力されていないフォームがあります')
         # メールアドレス形式の不一致
-        elif re.match(pattern, mail_address) is None:
+        
+        elif re.match(str(pattern), mail_address) is None:
             flash('メールアドレスの形式になっていません')
         # 全て正しかった場合
         else:
@@ -96,8 +98,8 @@ def register():
                     db.session.close()
                 # 成功したらログインページに遷移する
                 return redirect(url_for('stretch_app.home'))
-    return render_template('register.html')## !（ページ名）! ##
-
+    #return render_template('register.html')## !（ページ名）! ##
+    return jsonify("user_name", "mail_address", "password")
 ## トップページの表示
 @bp.route('/top')
 # ユーザーがログインしていない場合は、login_manager.login_viewによってstretch_app.loginに遷移する
