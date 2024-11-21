@@ -8,7 +8,7 @@ from wtforms import ValidationError
 import re
 
 ## Blueprintのインスタンス化
-bp = Blueprint('stretch_app', __name__, url_prefix='', template_folder='../../front/app/templates/build/', static_folder='../../front/app/templates/build/static/')
+bp = Blueprint('stretch_app', __name__, url_prefix='', template_folder='./templates/build/', static_folder='./templates/build/static/')
 
 ## ログイン画面の表示
 @bp.route('/')
@@ -63,8 +63,8 @@ def register():
         if user_name == '' or mail_address == '' or password == '':
             # flashモジュールを使用した文字の表示
             #flash('入力されていないフォームがあります')
-            ValidationError_from = str('入力されていないフォームがあります')
-            return jsonify(ValidationError_from)
+            ValidationError_form = str('入力されていないフォームがあります')
+            return jsonify(ValidationError_form)
             # raise ValidationError('入力されていないフォームがあります。') #from
         # メールアドレス形式の不一致
         elif re.match(str(pattern), mail_address) is None:
