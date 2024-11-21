@@ -91,14 +91,3 @@ body {
    .loginButton:hover {
      background-color: #0aadb9;
    }
-  
-   .errorMsg {
-     color: red;
-     margin: 0;
-     align-self: flex-start;
-   }
-  
-   .msgOK {
-     color: green;
-     margin-top: 15px;
-   }

@@ -5,6 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from dotenv import load_dotenv
+from flask_cors import CORS # Reactと接続するためのモジュールをインポート
 import os
 
 # .envファイルの取り込み
@@ -47,7 +48,8 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     ## 初期設定
-
+    # 全てのオリジンからアクセスを許可
+    cors = CORS(app, resources={r"/*": {"origins": ["http://127.0.0.1:3000", "http://127.0.0.1:5001"]}})
     # view.pyで記述するBlueprintの設定（Blueprintのインポート）
     from .views import bp
     # FlaskアプリでBlueprintを使用できる様にしている
