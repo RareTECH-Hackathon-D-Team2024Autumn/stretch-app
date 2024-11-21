@@ -44,38 +44,47 @@ export default function UserEdit() {
     <>
       <Header />
       {<Modal ModalOpen={{ isOpen, setOpen }} />}
-      <div>編集したい項目の編集ボタンを押して保存で編集ができます</div>
 
-      <div>
-        <input
-          name="username"
-          type="text"
-          placeholder="ユーザー名"
-          disabled={!isUserNameEdit}
-        ></input>
-        <button onClick={handleUserNameEditClick}>編集</button>
+      <div className="editForm">
+        <div className="editContainer">
+          <input
+            name="username"
+            type="text"
+            placeholder="ユーザー名"
+            disabled={!isUserNameEdit}
+          ></input>
+          <button className="editButton" onClick={handleUserNameEditClick}>
+            編集
+          </button>
+        </div>
+        <div className="editContainer">
+          <input
+            name="email"
+            type="text"
+            placeholder="メールアドレス"
+            disabled={!isEmailEdit}
+          ></input>
+          <button className="editButton" onClick={handleEmailEditClick}>
+            編集
+          </button>
+        </div>
+        <div className="editContainer">
+          <input
+            name="パスワード"
+            type="password"
+            placeholder="パスワード"
+            disabled={!isPasswordEdit}
+          ></input>
+          <button className="editButton" onClick={handlePasswordEditClick}>
+            編集
+          </button>
+        </div>
       </div>
-      <div>
-        <input
-          name="email"
-          type="text"
-          placeholder="メールアドレス"
-          disabled={isEmailEdit}
-        ></input>
-        <button onClick={handleEmailEditClick}>編集</button>
+      <div className="logoutContainer">
+        <button className="logoutButton" onClick={handleLogoutClick}>
+          ログアウト
+        </button>
       </div>
-      <div>
-        <input
-          name="パスワード"
-          type="password"
-          placeholder="パスワード"
-          disabled={!isPasswordEdit}
-        ></input>
-        <button onClick={handlePasswordEditClick}>編集</button>
-      </div>
-      <button className="logoutButton" onClick={handleLogoutClick}>
-        ログアウト
-      </button>
       <button className="unsubscribeButton" onClick={handleUnsubscribeButton}>
         退会
       </button>

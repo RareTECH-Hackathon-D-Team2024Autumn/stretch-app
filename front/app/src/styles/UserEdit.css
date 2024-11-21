@@ -1,4 +1,10 @@
 /* ログアウトボタン */
+.logoutContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .logoutButton {
   color: #000000;
   background-color: #ffffff;
@@ -8,6 +14,38 @@
 }
 .logoutButton:hover {
   background: #f7f7f7;
+}
+
+.editForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 20px;
+}
+
+.editContainer {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.editContainer input {
+  height: 30px;
+}
+
+.editButton {
+  color: #000000;
+  background-color: #89f4d7;
+  width: auto;
+  margin: 0px;
+  height: 40px;
+  border-radius: 20px;
+}
+
+.editButton:hover {
+  color: #000000;
+  background-color: #89e4d5;
 }
 
 /* 保存ボタン */
@@ -23,7 +61,7 @@
 }
 .saveButton:hover {
   color: #000000;
-  background-color: #96f2da;
+  background-color: #89e4d5;
 }
 
 /* 退会ボタン */
