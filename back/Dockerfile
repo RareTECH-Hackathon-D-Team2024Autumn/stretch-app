@@ -20,7 +20,8 @@ RUN pip install --upgrade pip \
 
 # COPY ./app /usr/src
 
-
+# コンテナの使用ポート指定
+EXPOSE 5001
 
 CMD [ "flask", "run", "--host=0.0.0.0" ]
 
