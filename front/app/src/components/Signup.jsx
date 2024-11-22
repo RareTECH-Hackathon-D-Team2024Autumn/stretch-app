@@ -6,7 +6,7 @@ import axios from "axios";
 export default function Signup() {
   const initialValues = { user_name: "", mail_address: "", password: "" };
   const [formValues, setFormValues] = useState(initialValues);
-  const [responseMessage, setResponseMessage] =useState("");
+  const [responseMessage, setResponseMessage] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,22 +19,23 @@ export default function Signup() {
   const handleRegister = async (e) => {
     e.preventDefault(); // JSメソッド、フォームがデフォルトでリロードされるのを防止
 
-    try{
-      const response = await axios.post(`${process.env.REACT_APP_REGISTER_ENDPOINT}`,formValues,
+    // データをJSON形式に変換
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_REGISTER_ENDPOINT}`, JSON.stringify(formValues),
         {
-          headers:{
-          "Content-Type":"application/json", //HTTPヘッダの一つでデータの形式を指定するのに使用。この場合リクエストのヘッダにはJSON形式のデータがあることを伝える 
+          headers: {
+            "Content-Type": "application/json", //HTTPヘッダの一つでデータの形式を指定するのに使用。この場合リクエストのヘッダにはJSON形式のデータがあることを伝える 
           },
         }
       );
-      
+
       console.log(response.data);  //axiosではレスポンスデータはresponse.dataで取得できる
       setResponseMessage(response.data.message || "登録されました！");
 
       navigate("/top"); //Topページに遷移
 
-    } catch (error){
-      console.error("登録中にエラーが発生しました。：",error);
+    } catch (error) {
+      console.error("登録中にエラーが発生しました。：", error);
       setResponseMessage("登録中にエラーが発生しました。")
     }
   };

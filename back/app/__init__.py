@@ -32,7 +32,7 @@ migrate = Migrate()
 
 def create_app():
     # Flask自体をappという名前でインスタンス化し、returnで返す
-    app = Flask(__name__, template_folder="../../../front/app/src/components")
+    app = Flask(__name__, template_folder='./templates/build/', static_folder='./templates/build/static/')
 
     # SECRET_KEYの定義
     app.config['SECRET_KEY'] = SECRET_KEY
@@ -49,9 +49,7 @@ def create_app():
 
     ## 初期設定
     # 全てのオリジンからアクセスを許可
-    # CORS(app)を後で修正するのが必須
-    # cors = CORS(app, resources={r"/*": {"origins": ["http://127.0.0.1:3000", "http://127.0.0.1:5001"]}})
-
+    #CORS(app, resources={r"/*": {"origins":["http://127.0.0.1:3000", "http://127.0.0.1:5001"]}})
     CORS(app)
     # view.pyで記述するBlueprintの設定（Blueprintのインポート）
     from .views import bp
