@@ -64,8 +64,8 @@ services:
       - "3306"
     volumes:
       - ./back/DB/conf.d:/etc/mysql/conf.d:cached
-      - ./back/DB/initdb.d:/initdb.d/
-      - ./log/db:/var/log/mysql:cached
+      - ./back/DB/initdb.d:/docker-entrypoint-initdb.d
+      - ./log/db:/var/lib/mysql
     networks:
       - back_network
     environment:

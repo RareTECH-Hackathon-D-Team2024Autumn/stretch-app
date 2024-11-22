@@ -42,5 +42,6 @@
     "@eslint/js": "^9.14.0",
     "eslint": "^8.57.1",
     "prettier": "3.3.3"
-  }
+  },
+  "proxy": "http://localhost:5001"
 }
