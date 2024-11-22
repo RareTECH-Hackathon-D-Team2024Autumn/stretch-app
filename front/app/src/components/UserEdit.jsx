@@ -3,6 +3,7 @@ import Header from "./Header";
 import "../styles/UserEdit.css";
 import { useNavigate } from "react-router-dom";
 import Modal from "./Modal";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function UserEdit() {
   const [isOpen, setOpen] = useState(false);
@@ -43,6 +44,9 @@ export default function UserEdit() {
   const handleEditClick = () => {
     navigate("/top");
   };
+
+  // トースト
+  const notify = () => toast.success("保存しました(メッセージのみ)");
   return (
     <>
       <Header />
@@ -93,7 +97,10 @@ export default function UserEdit() {
       <button className="unsubscribeButton" onClick={handleUnsubscribeButton}>
         退会
       </button>
-      <button className="saveButton">保存</button>
+      <button className="saveButton" onClick={notify}>
+        保存
+      </button>
+      <Toaster />
     </>
   );
 }
