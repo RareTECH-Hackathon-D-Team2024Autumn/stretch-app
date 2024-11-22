@@ -40,11 +40,16 @@ export default function UserEdit() {
   const handleLogoutClick = () => {
     navigate("/");
   };
+  const handleEditClick = () => {
+    navigate("/top");
+  };
   return (
     <>
       <Header />
       {<Modal ModalOpen={{ isOpen, setOpen }} />}
-
+      <button className="edit-button" onClick={handleEditClick}>
+        Topページへ
+      </button>
       <div className="editForm">
         <div className="editContainer">
           <input
