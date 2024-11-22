@@ -38,9 +38,12 @@ def login():
         if user and user.validate_password(password):
            login_user(user)
            next = request.args.get('next')
-           if not next:
-               next = url_for('stretch_app.top')
-           return redirect(next)
+        else:
+           ValidationError_match = str('メールアドレスもしくはパスワードが間違っています')
+           return jsonify(ValidationError_match)
+        if not next:
+            next = url_for('stretch_app.top')
+        return redirect(next)
     return render_template('index.html', last_access=datetime.now()) ##login画面の追加##
 
 
