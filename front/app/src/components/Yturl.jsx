@@ -9,7 +9,7 @@ export default function Yturl (props){
         <h2><a href={singleData.url} target="_blank" rel="noreferrer">{singleData.title}</a></h2>
         <p>{singleData.created_at}</p> 
         <a href={singleData.url} target="_blank" rel="noreferrer">
-          <iframe src={singleData.thumbnail} ></iframe>
+          <iframe src={singleData.thumbnail} title="リンク先サムネイル"></iframe>
         </a>
       </div>)}
     </div>
