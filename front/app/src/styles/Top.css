@@ -49,6 +49,14 @@
   text-align: center;
 }
 
+.favorite-button {
+  width: 10%;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  border-radius: 10px;
+}
+
 .maincontainer {
   padding: 80px;
 }

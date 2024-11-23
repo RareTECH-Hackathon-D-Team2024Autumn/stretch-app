@@ -22,6 +22,7 @@ export default function Top(props) {
           <Yturl allYturlData={props.allYturlData} />
         </div>
       </main>
+      <button className="favorite-button">お気に入り一覧へ</button>
       <Footer />
     </>
   );
