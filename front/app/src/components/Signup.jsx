@@ -15,7 +15,7 @@ export default function Signup() {
 
   // ルーティング設定
   const navigate = useNavigate();
-  const handleRegister = () => {
+  const handleRegister = async (e) => {
     e.preventDefault(); // JSメソッド、フォームがデフォルトでリロードされるのを防止
 
     // データをJSON形式に変換

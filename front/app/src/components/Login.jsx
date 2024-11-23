@@ -6,9 +6,9 @@ export default function Login() {
   const initialValues = { mailAddress: "", password: "" };
   const [formValues, setFormValues] = useState(initialValues);
 
-  const handleChange = (e) => { 
-    const { name, value } =e.target;
-    setFormValues({...formValues,[name]:value});
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
   };
 
   const handleSubmit = (e) => {
