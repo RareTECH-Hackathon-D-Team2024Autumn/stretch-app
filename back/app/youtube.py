@@ -2,6 +2,7 @@ from dotenv import load_dotenv
 import json
 import os
 import mysql.connector
+import random
 
 load_dotenv('./.env')
 DB_USER=os.getenv('DB_USER')
@@ -49,9 +50,12 @@ order=ORDER,
 regionCode=REGION_CODE
 ).execute()
 
-idInfo = response['items'][0]['id']
-snippetInfo = response['items'][0]['snippet']
-thumbnailInfo = response['items'][0]['snippet']['thumbnails']['default']
+# 取得した動画をランダムでDBに保管する値を生成
+random_number = random.randint(0, 49)
+
+idInfo = response['items'][random_number]['id']
+snippetInfo = response['items'][random_number]['snippet']
+thumbnailInfo = response['items'][random_number]['snippet']['thumbnails']['default']
 
 # 動画タイトル
 title = snippetInfo['title']
