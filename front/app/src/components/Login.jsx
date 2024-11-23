@@ -22,7 +22,7 @@ export default function Login() {
     navigate("/signup");
   };
   const handleLogin = () => {
-    navigate("/Top");
+    navigate("/top");
   };
 
   return (
