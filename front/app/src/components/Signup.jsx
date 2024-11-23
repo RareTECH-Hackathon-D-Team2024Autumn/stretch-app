@@ -29,7 +29,7 @@ export default function Signup() {
         }
       );
 
-      console.log(response.data);  //axiosではレスポンスデータはresponse.dataで取得できる
+
       setResponseMessage(response.data.message || "登録されました！");
 
       navigate("/top"); //Topページに遷移
