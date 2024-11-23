@@ -21,6 +21,9 @@ from sqlalchemy import ForeignKey
 # 外部キーとのリレーションを行うためのモジュールのインポート
 from sqlalchemy.orm import relationship
 
+# データベースでCURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMPを使用するためのモジュールをインポート
+from sqlalchemy.sql.expression import text
+
 # .envファイルを呼び出す
 load_dotenv('/back/app/.env')
 # .envファイル内のペッパー値を変数に代入
@@ -86,10 +89,10 @@ class Top(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     user_id = db.Column(db.Integer, ForeignKey('users.id') ,nullable=False)
     video_id = db.Column(db.Integer, ForeignKey('youtube_videoes.id') ,nullable=False)
-    my_favorite = db.Column(db.Boolean, default=False, nullable=False)
+    my_favorite = db.Column(db.Boolean, nullable=False)
     # DateTimeのデフォルト値をユーザー作成時のサーバーの時刻とする
     created_at = db.Column(db.DateTime, server_default=func.now())
     # DateTimeのデフォルト値をユーザー作成時のサーバーの時刻とする
-    updated_at = db.Column(db.DateTime, server_default=func.now())
+    updated_at = db.Column(db.DateTime, server_default=text('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'))
 
 

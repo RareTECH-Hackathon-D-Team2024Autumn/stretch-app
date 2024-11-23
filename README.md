@@ -61,16 +61,16 @@
 <!-- Treeコマンドを使ってディレクトリ構成を記載 -->
 -Iオプションで除外条件の指定
 node_modulesを除外
+dbを除外
 
-❯ tree  -I "node_modules" -L 4
+❯ tree -I "node_modules|db" -P . -L 4   
 
 ```plaintext
 .
 ├── README.md
 ├── .env
-├── .gitignore
 ├── api
-│   ├──compose.yaml
+│   └── api.yaml
 ├── back
 │   ├── DB
 │   │   ├── Dockerfile
@@ -79,14 +79,39 @@ node_modulesを除外
 │   │   └── initdb.d
 │   │       └── init.sql
 │   ├── Dockerfile
+│   ├── __pycache__
+│   │   └── setup.cpython-312.pyc
 │   ├── app
+│   │   ├── __init__.py
 │   │   ├── __pycache__
-│   │   │   └── app.cpython-312.pyc
-│   │   └── app.py
+│   │   │   ├── __init__.cpython-312.pyc
+│   │   │   ├── app.cpython-312.pyc
+│   │   │   ├── models.cpython-312.pyc
+│   │   │   └── views.cpython-312.pyc
+│   │   ├── app.py
+│   │   ├── models.py
+│   │   ├── static
+│   │   │   └── css
+│   │   ├── templates
+│   │   │   ├── _formhelpers.html
+│   │   │   ├── base.html
+│   │   │   ├── build
+│   │   │   ├── home.html
+│   │   │   ├── login.html
+│   │   │   ├── register.html
+│   │   │   ├── top.html
+│   │   │   └── user.html
+│   │   ├── views.py
+│   │   ├── youtube.py
+│   │   ├── .env
+│   │   ├── .env_example
+│   ├── design-document
+│   │   └── Hackathon_TeamD.drawio.svg
 │   ├── requirements.txt
 │   └── scripts
 │       └── run.sh
 ├── compose.yaml
+├── debug_text
 ├── front
 │   ├── Dockerfile
 │   └── app
@@ -100,22 +125,21 @@ node_modulesを除外
 │       │   ├── logo512.png
 │       │   ├── manifest.json
 │       │   └── robots.txt
-│       └── src
-│           ├── components
-│           │   ├── Login.jsx
-│           │   ├── Signup.jsx
-│           ├── styles
-│           │   ├── Login.css
-│           │   ├── Signup.css
-│           ├── App.jsx
-│           ├── App.test.js
-│           ├── index.css
-│           ├── index.js
-│           ├── logo.svg
-│           ├── reportWebVitals.js
-│           └── setupTests.js
+│       ├── src
+│       │   ├── App.jsx
+│       │   ├── App.test.js
+│       │   ├── components
+│       │   ├── index.css
+│       │   ├── index.js
+│       │   ├── logo.svg
+│       │   ├── reportWebVitals.js
+│       │   ├── setupTests.js
+│       │   └── styles
+│       └── .env
+├── infra_drawing
+│   └── Hackathon_TeamD_infra.drawio.svg
 └── log
-    └── db
+   └── db
 ```
 
 <p align="right">(<a href="#top">トップへ</a>)</p>
@@ -168,25 +192,40 @@ http://localhost:5001 にアクセスできるか確認
 http://localhost:3000 にアクセスできるか確認
 アクセスできたら成功
 
-データベース
-1. stretch-appディレクトリにて、docker compose up -d の実行
-
-2. docker psを実行し、mysql_dbが起動しているか確認
-
-3. docker exec -it mysql_db bashを実行し、Dockerにログイン
-
-4. mysql -u root -pなどでユーザーを指定し、パスワードを入力してMySQLへログイン
-
-5. MySQLはquit; Dockerはexitで終了
-
 ### コンテナの停止
 
 以下のコマンドでコンテナを停止することができます
 
 docker compose stop
 
-### バックエンド（flask）起動方法
-./.env_exampleに記載
+## バックエンド（flask）起動方法
+
+### .envファイルの作成
+1.  ./stretch-app内に .envファイル（DB用）を作成
+    .envファイルのダウンロード先 → https://chat.raretech.site/d13/pl/oj9jirhbeprixpgf9sysyg6qdy
+2. ./stretch_app/back/app内に .envファイル（flask用）を作成
+   .envファイルのダウンロード先 → https://chat.raretech.site/d13/pl/bh7tmnpfjirxprz5qoxyobi13c
+
+### DBの準備
+1.  docker compose up -d まで実施すると./stretch-app/log/db内にDBの作成に必要なファイルが作成される
+2.  docker compose exec db /bin/bash でstretch-app-dbコンテナに入る
+3.  mysql -uroot -p でrootユーザーでMySQLを操作する（パスワード = MYSQL_ROOT_PASSWORD：./stretch-app/.envファイル参照）
+4.  show databases; でStretch_DBがデータベースとして存在するか確認する
+5.  grant all on Stretch_DB.* to 'stretch_user'@'%'; でstretch_userにStretch_DBを使用する権限を付与する
+6.  exit;
+7.  mysql -ustretch_user -p でstretch_userでMySQLを操作する（パスワード = MYSQL_PASSWORD：./stretch-app/.envファイル参照）
+8.  use Stretch_DB; で使用するデータベースが選択できるか確認し、 show tables; でテーブルが存在するか確認する
+9.  問題なければ exit;
+10. docker compose down でコンテナを終了後、 docker compose up -d で再度7, 8を実施してデータベースとテーブルが問題なければOK
+
+### フロントエンドとの連携
+1.  docker compose up -d まで実施後、 docker compose exec node sh でstretch-app-nodeコンテナに入る
+2.  コンテナ内で cd /app でappディレクトリに移動し npm run build でbuildディレクトリを作成する
+3.  exit
+4.  ./stretch-app/back/app/内にtemplatesディレクトリを作成し、先ほどのbuildディレクトリをtemplatesディレクトリ内に移動する（buildディ
+    レクトリは./stretch-app/front/appからは削除して問題ありません）
+5.  docker compose up で http://localhost:5001/ にアクセスできるか確認する
+
 
 ### 環境変数の一覧
 
@@ -197,15 +236,7 @@ docker compose stop
 | MYSQL_USER             | MySQL のユーザ名（Docker で使用）         | user                               |                                          |
 | MYSQL_PASSWORD         | MySQL のパスワード（Docker で使用）       | password                           |                                          |
 | MYSQL_HOST             | MySQL のホスト名（Docker で使用）         | db                                 |                                          |
-| SECRET_KEY             | シークレットキー(flask で使用)　　　　　　　 | 任意のシークレットキー（例：test）       | back/app/__init__.pyで使用　　　　　　　　　 |
-| DB_USER                |　MySQL にログインするユーザー名（flask で使用）| 任意のMySQLのユーザー名（例：test）　　| back/app/__init__.pyで使用                |
-| PASSWORD               |　MySQL にログインするユーザーのパスワード（flask で使用）| 任意のMySQLユーザーのパスワード（例：test）　| back/app/__init__.pyで使用   |
-| DB_HOST                |　Dockerの MySQLコンテナホスト名（flaskで使用）| db　　　　　　　　　　　　            | back/app/__init__.pyで使用                |
-| DB_NAME                |　使用するDB名                             | 任意のDB名（例：test）　　　　　　　　　 | back/app/__init__.pyで使用                |
-| DEBUG                  |　デバック機能を有効化（flaskで使用）          | True                               | back/app/app.pyで使用                     |
-| DEBUG_NULL             |　デバック機能を無効化（flaskで使用）          | False                              | back/app/app.pyで使用                     |
-| HOST                   |　起動アドレス番号                           | 0.0.0.0                            | back/app/app.pyで使用                     |
-| PORT                   |　起動ポート番号                             | 5000                               | back/app/app.pyで使用                     |
+
 ## API仕様書
 
 [Swagger](https://swagger.io/)を使ってAPIの仕様を定義
