@@ -10,19 +10,11 @@ import re
 ## Blueprintのインスタンス化
 bp = Blueprint('stretch_app', __name__, url_prefix='', template_folder='./templates/build/', static_folder='./templates/build/static/')
 
-## ログイン画面の表示
-@bp.route('/')
-def home():
-    #response = make_response(render_template('Signup.jsx'))
-    #return response
-    return render_template('index.html') ## !ログイン画面のファイル名を追加! ##
-
 ## ログアウト
 @bp.route('/logout')
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('stretch_app.home'))
 
 ## ログイン
 @bp.route('/login', methods=['GET', 'POST'])
@@ -40,11 +32,9 @@ def login():
            next = request.args.get('next')
         else:
            ValidationError_match = str('メールアドレスもしくはパスワードが間違っています')
-           return jsonify(ValidationError_match)
-        if not next:
-            next = url_for('stretch_app.top')
-        return redirect(next)
-    return render_template('index.html', last_access=datetime.now()) ##login画面の追加##
+           return jsonify(message = ValidationError_match),400
+        # return jsonify({'message': 'hello internal'}), 500
+    return jsonify(data) ##login画面の追加##
 
 
 
@@ -57,7 +47,6 @@ def register():
     user_name = data['user_name']
     mail_address = data['mail_address']
     password = data['password']
-    print(data)
     # メールアドレスを正規表現で指定
     pattern = "^[a-zA-Z0-9_.%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9-.]{2,}+$"
     # POSTリクエスト
@@ -114,14 +103,6 @@ def register():
                 # responseにjsonで返すデータを格納
                 #response = jsonify(data)
                 #response.status_code = 200
-                # 成功したらログインページに遷移する
-                return redirect(url_for('stretch_app.home'))
-    #return render_template('register.html')## !（ページ名）! ##
     return jsonify(data)
     #make_response(jsonify(response))
-## トップページの表示
-@bp.route('/videoes')
-# ユーザーがログインしていない場合は、login_manager.login_viewによってstretch_app.loginに遷移する
-@login_required
-def top():
-    return render_template('index.html') ## !トップページ画面のファイル名を追加! ##
+
