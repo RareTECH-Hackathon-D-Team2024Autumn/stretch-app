@@ -57,6 +57,9 @@ h1 {
   font-weight: 600;
   mergin-bottom: 3px;
 }
+.responseMessage{
+  color: red;
+}
 
 button {
   background-color: #0e528d;
