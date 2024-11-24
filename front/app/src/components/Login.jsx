@@ -8,9 +8,9 @@ export default function Login() {
   const [formValues, setFormValues] = useState(initialValues);
   const [responseMessage, setResponseMessage] = useState("");
 
-  const handleChange = (e) => { 
-    const { name, value } =e.target;
-    setFormValues({...formValues,[name]:value});
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
   };
 
   // ルーティング設定
@@ -32,7 +32,7 @@ export default function Login() {
         });
       localStorage.setItem("mail_address",response.data.mail_address);
       setResponseMessage(response.data.message || "ログイン成功！");
-      navigate("/Top");
+      navigate("/top");
     } catch (error){ 
       
       const errorMessage = error.response.data.message || "ログインに失敗しました。";
