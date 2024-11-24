@@ -23,5 +23,5 @@ RUN pip install --upgrade pip \
 # コンテナの使用ポート指定
 EXPOSE 5001
 
-CMD [ "flask", "run", "--host=0.0.0.0" ]
+CMD [ "flask", "run", "--host=0.0.0.0","debug=True"]
 
