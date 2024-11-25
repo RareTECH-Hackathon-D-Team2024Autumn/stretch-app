@@ -213,12 +213,47 @@ docker compose stop
 2. docker compose exec db /bin/bash で stretch-app-db コンテナに入る
 3. mysql -uroot -p で root ユーザーで MySQL を操作する（パスワード = MYSQL_ROOT_PASSWORD：./stretch-app/.env ファイル参照）
 4. show databases; で Stretch_DB がデータベースとして存在するか確認する
-5. grant all on Stretch_DB.\* to 'stretch_user'@'%'; で stretch_user に Stretch_DB を使用する権限を付与する
+5. GRANT ALL ON Stretch_DB.\* TO 'stretch_user'@'%'; で stretch_user に Stretch_DB を使用する権限を付与する
+
+※1 エラーが発生したときの対処法を手順の最後に記載
+
 6. exit;
 7. mysql -ustretch_user -p で stretch_user で MySQL を操作する（パスワード = MYSQL_PASSWORD：./stretch-app/.env ファイル参照）
-8. use Stretch_DB; で使用するデータベースが選択できるか確認し、 show tables; でテーブルが存在するか確認する
+8. USE Stretch_DB; で使用するデータベースが選択できるか確認し、 SHOW TABLES; でテーブルが存在するか確認する
+
+```
+mysql> SHOW TABLES;
++----------------------+
+| Tables_in_stretch_db |
++----------------------+
+| top_pages            |
+| users                |
+| youtube_videoes      |
++----------------------+
+3 rows in set (0.03 sec)
+```
+
 9. 問題なければ exit;
 10. docker compose down でコンテナを終了後、 docker compose up -d で再度 7, 8 を実施してデータベースとテーブルが問題なければ OK
+
+※1 許可がないというエラーが発生したとき
+
+```
+mysql> GRANT ALL ON Stretch_DB.\* TO 'stretch_user'@'%';
+ERROR 1410 (42000): You are not allowed to create a user with GRANT
+```
+
+1. stretch-app ディレクトリの直下に .env があるか確認する
+
+2. .env が存在する場合は stretch_user が存在するか確認
+
+```
+SELECT User, Host FROM mysql.user WHERE User = 'stretch_user';
+```
+
+3. stretch_user が存在しない場合は CREATE 文を実行して user を作成する
+
+create user 'stretch_user'@'%' identified by 'stretch_MySQL'
 
 ### フロントエンドとの連携
 
