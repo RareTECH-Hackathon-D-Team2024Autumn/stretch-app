@@ -1,4 +1,4 @@
-import React,{ useState } from "react";
+import React, { useState } from "react";
 import "../styles/Login.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -19,24 +19,27 @@ export default function Login() {
   const handleSignup = () => {
     navigate("/signup");
   };
-  
+
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(process.env.REACT_APP_LOGIN_ENDPOINT,JSON.stringify(formValues),
+      const response = await axios.post(
+        process.env.REACT_APP_LOGIN_ENDPOINT,
+        JSON.stringify(formValues),
         {
           headers: {
-            "Content-Type": "application/json" //HTTPヘッダの一つでデータの形式を指定するのに使用。この場合リクエストのヘッダにはJSON形式のデータがあることを伝える 
+            "Content-Type": "application/json", //HTTPヘッダの一つでデータの形式を指定するのに使用。この場合リクエストのヘッダにはJSON形式のデータがあることを伝える
           },
-        });
-      localStorage.setItem("mail_address",response.data.mail_address);
+        }
+      );
+      localStorage.setItem("mail_address", response.data.mail_address);
       setResponseMessage(response.data.message || "ログイン成功！");
       navigate("/top");
-    } catch (error){ 
-      
-      const errorMessage = error.response.data.message || "ログインに失敗しました。";
-      
+    } catch (error) {
+      const errorMessage =
+        error.response.data.message || "ログインに失敗しました。";
+
       setResponseMessage(errorMessage);
     }
   };
@@ -52,7 +55,7 @@ export default function Login() {
               type="text"
               placeholder="メールアドレスを入力してください"
               name="mail_address"
-              onChange={ handleChange}
+              onChange={handleChange}
             />
           </div>
           <div className="formField">
@@ -65,7 +68,11 @@ export default function Login() {
             />
           </div>
           <div className="Button">
-            <button type="button" className="submitButton" onClick={handleSignup}>
+            <button
+              type="button"
+              className="submitButton"
+              onClick={handleSignup}
+            >
               新規登録
             </button>
             <button type="submit" className="loginButton">
