@@ -150,7 +150,7 @@ db を除外
 
 ### コンテナの作成と起動
 
-1. compose.yaml のある階層まで移動
+1. compose.yaml の階層まで移動
 
 2. docker build コマンドで Docker イメージの作成
 
@@ -257,12 +257,11 @@ create user 'stretch_user'@'%' identified by 'stretch_MySQL'
 
 ### フロントエンドとの連携
 
-1.  docker compose up -d まで実施後、 docker compose exec node sh で stretch-app-node コンテナに入る
-2.  コンテナ内で cd /app で app ディレクトリに移動し npm run build で build ディレクトリを作成する
-3.  exit
-4.  ./stretch-app/back/app/内に templates ディレクトリを作成し、先ほどの build ディレクトリを templates ディレクトリ内に移動する（build ディ
-    レクトリは./stretch-app/front/app からは削除して問題ありません）
-5.  docker compose up で http://localhost:5001/ にアクセスできるか確認する
+1. docker compose up -d まで実施後、 docker compose exec node sh で stretch-app-node コンテナに入る
+2. コンテナ内で cd app で app ディレクトリに移動し npm run build で build ディレクトリを作成する
+3. exit
+4. ./stretch-app/back/app/内に templates ディレクトリを作成し、先ほどの build ディレクトリを templates ディレクトリ内に移動する（build ディレクトリは./stretch-app/front/app からは削除して問題ありません）
+5. docker compose up で http://localhost:5001/ にアクセスできるか確認する
 
 ### 環境変数の一覧
 
@@ -290,9 +289,10 @@ create user 'stretch_user'@'%' identified by 'stretch_MySQL'
 
 詳細は参考記事を参照
 
-## README 参考記事
+## 参考記事
 
 [全プロジェクトで重宝されるイケてる README を作成しよう！](https://qiita.com/shun198/items/c983c713452c041ef787)
 [OpenAPI・Swagger でインタラクティブな API 仕様ドキュメントを作成する](https://zenn.dev/knm/articles/32106f623bd382)
 
 <p align="right">(<a href="#top">トップへ</a>)</p>
+```
