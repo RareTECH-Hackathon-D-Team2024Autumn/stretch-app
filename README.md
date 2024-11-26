@@ -239,7 +239,7 @@ mysql> SHOW TABLES;
 ※1 許可がないというエラーが発生したとき
 
 ```
-mysql> GRANT ALL ON Stretch_DB.\* TO 'stretch_user'@'%';
+mysql> GRANT ALL ON Stretch_DB.* TO 'stretch_user'@'%';
 ERROR 1410 (42000): You are not allowed to create a user with GRANT
 ```
 
