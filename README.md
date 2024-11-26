@@ -35,7 +35,6 @@
 
 ## プロジェクト名
 
-
 <!-- プロジェクトについて -->
 
 <p align="right">(<a href="#top">トップへ</a>)</p>
@@ -44,13 +43,13 @@
 
 <!-- 言語、フレームワーク、ミドルウェア、インフラの一覧とバージョンを記載 -->
 
-| 言語・フレームワーク     | バージョン |
-| --------------------- | ---------- |
-| Python                | 3.12.7     |
-| Flask                 | 3.0.3      |
-| MySQL                 | 8.0        |
-| Node.js               | 20.18.0    |
-| React                 | 18.2.0     |
+| 言語・フレームワーク | バージョン |
+| -------------------- | ---------- |
+| Python               | 3.12.7     |
+| Flask                | 3.0.3      |
+| MySQL                | 8.0        |
+| Node.js              | 20.18.0    |
+| React                | 18.2.0     |
 
 その他のパッケージのバージョンは pyproject.toml と package.json を参照してください
 
@@ -59,11 +58,12 @@
 ## ディレクトリ構成
 
 <!-- Treeコマンドを使ってディレクトリ構成を記載 -->
--Iオプションで除外条件の指定
-node_modulesを除外
-dbを除外
 
-❯ tree -I "node_modules|db" -P . -L 4   
+-I オプションで除外条件の指定
+node_modules を除外
+db を除外
+
+❯ tree -I "node_modules|db" -P . -L 4
 
 ```plaintext
 .
@@ -150,22 +150,22 @@ dbを除外
 
 ### コンテナの作成と起動
 
-1. compose.yamlのある階層まで移動
+1. compose.yaml の階層まで移動
 
-2. docker buildコマンドで Dockerイメージの作成
+2. docker build コマンドで Docker イメージの作成
 
    docker compose build
 
-3. Dockerコンテナ内でパッケージのインストール
+3. Docker コンテナ内でパッケージのインストール
 
    docker compose run --rm node sh -c "cd app && npm install"
 
-4. docker compose upでDockerコンテナを起動
+4. docker compose up で Docker コンテナを起動
 
    docker compose up -d
 
    -d: コンテナをバックグラウンドで実行させる
-       付与しないとフォアグラウンドで実行されて、コンテナのログが画面上に出力され、ターミナル上で続けてコマンドを打てなくなる
+   付与しないとフォアグラウンドで実行されて、コンテナのログが画面上に出力され、ターミナル上で続けてコマンドを打てなくなる
 
 5. 確認できたら、コンテナを停止させる
 
@@ -177,10 +177,10 @@ dbを除外
 
 ※ コンテナを削除するコマンド
 
-   docker compose down --rmi all
+docker compose down --rmi all
 
-   --rmi: イメージも同時に削除
-   all: 全てのイメージを削除
+--rmi: イメージも同時に削除
+all: すべてのイメージを削除
 
 ### 動作確認
 
@@ -200,76 +200,99 @@ docker compose stop
 
 ## バックエンド（flask）起動方法
 
-### .envファイルの作成
-1.  ./stretch-app内に .envファイル（DB用）を作成
-    .envファイルのダウンロード先 → https://chat.raretech.site/d13/pl/oj9jirhbeprixpgf9sysyg6qdy
-2. ./stretch_app/back/app内に .envファイル（flask用）を作成
-   .envファイルのダウンロード先 → https://chat.raretech.site/d13/pl/bh7tmnpfjirxprz5qoxyobi13c
+### .env ファイルの作成
 
-### DBの準備
-1.  docker compose up -d まで実施すると./stretch-app/log/db内にDBの作成に必要なファイルが作成される
-2.  docker compose exec db /bin/bash でstretch-app-dbコンテナに入る
-3.  mysql -uroot -p でrootユーザーでMySQLを操作する（パスワード = MYSQL_ROOT_PASSWORD：./stretch-app/.envファイル参照）
-4.  show databases; でStretch_DBがデータベースとして存在するか確認する
-5.  grant all on Stretch_DB.* to 'stretch_user'@'%'; でstretch_userにStretch_DBを使用する権限を付与する
-6.  exit;
-7.  mysql -ustretch_user -p でstretch_userでMySQLを操作する（パスワード = MYSQL_PASSWORD：./stretch-app/.envファイル参照）
-8.  use Stretch_DB; で使用するデータベースが選択できるか確認し、 show tables; でテーブルが存在するか確認する
-9.  問題なければ exit;
-10. docker compose down でコンテナを終了後、 docker compose up -d で再度7, 8を実施してデータベースとテーブルが問題なければOK
+1. ./stretch-app 内に .env ファイル（DB 用）を作成
+   .env ファイルのダウンロード先 → https://chat.raretech.site/d13/pl/oj9jirhbeprixpgf9sysyg6qdy
+2. ./stretch_app/back/app 内に .env ファイル（flask 用）を作成
+   .env ファイルのダウンロード先 → https://chat.raretech.site/d13/pl/bh7tmnpfjirxprz5qoxyobi13c
+
+### DB の準備
+
+1. docker compose up -d まで実施すると./stretch-app/log/db 内に DB の作成に必要なファイルが作成される
+2. docker compose exec db /bin/bash で stretch-app-db コンテナに入る
+3. mysql -uroot -p で root ユーザーで MySQL を操作する（パスワード = MYSQL_ROOT_PASSWORD：./stretch-app/.env ファイル参照）
+4. show databases; で Stretch_DB がデータベースとして存在するか確認する
+5. GRANT ALL ON Stretch_DB.\* TO 'stretch_user'@'%'; で stretch_user に Stretch_DB を使用する権限を付与する
+
+※1 エラーが発生したときの対処法を手順の最後に記載
+
+6. exit;
+7. mysql -ustretch_user -p で stretch_user で MySQL を操作する（パスワード = MYSQL_PASSWORD：./stretch-app/.env ファイル参照）
+8. USE Stretch_DB; で使用するデータベースが選択できるか確認し、 SHOW TABLES; でテーブルが存在するか確認する
+
+```
+mysql> SHOW TABLES;
++----------------------+
+| Tables_in_stretch_db |
++----------------------+
+| top_pages            |
+| users                |
+| youtube_videoes      |
++----------------------+
+3 rows in set (0.03 sec)
+```
+
+9. 問題なければ exit;
+10. docker compose down でコンテナを終了後、 docker compose up -d で再度 7, 8 を実施してデータベースとテーブルが問題なければ OK
+
+※1 許可がないというエラーが発生したとき
+
+```
+mysql> GRANT ALL ON Stretch_DB.* TO 'stretch_user'@'%';
+ERROR 1410 (42000): You are not allowed to create a user with GRANT
+```
+
+1. stretch-app ディレクトリの直下に .env があるか確認する
+
+2. .env が存在する場合は stretch_user が存在するか確認
+
+```
+SELECT User, Host FROM mysql.user WHERE User = 'stretch_user';
+```
+
+3. stretch_user が存在しない場合は CREATE 文を実行して user を作成する
+
+create user 'stretch_user'@'%' identified by 'stretch_MySQL'
 
 ### フロントエンドとの連携
-1.  docker compose up -d まで実施後、 docker compose exec node sh でstretch-app-nodeコンテナに入る
-2.  コンテナ内で cd /app でappディレクトリに移動し npm run build でbuildディレクトリを作成する
-3.  exit
-4.  ./stretch-app/back/app/内にtemplatesディレクトリを作成し、先ほどのbuildディレクトリをtemplatesディレクトリ内に移動する（buildディ
-    レクトリは./stretch-app/front/appからは削除して問題ありません）
-5.  docker compose up で http://localhost:5001/ にアクセスできるか確認する
 
+1. docker compose up -d まで実施後、 docker compose exec node sh で stretch-app-node コンテナに入る
+2. コンテナ内で cd app で app ディレクトリに移動し npm run build で build ディレクトリを作成する
+3. exit
+4. ./stretch-app/back/app/内に templates ディレクトリを作成し、先ほどの build ディレクトリを templates ディレクトリ内に移動する（build ディレクトリは./stretch-app/front/app からは削除して問題ありません）
+5. docker compose up で http://localhost:5001/ にアクセスできるか確認する
 
 ### 環境変数の一覧
 
-| 変数名                 | 役割                                      | デフォルト値                       | DEV 環境での値                           |
-| ---------------------- | ----------------------------------------- | ---------------------------------- | ---------------------------------------- |
-| MYSQL_ROOT_PASSWORD    | MySQL のルートパスワード（Docker で使用） | password                           |                                          |
-| MYSQL_DATABASE         | MySQL のデータベース名（Docker で使用）   | db                                 |                                          |
-| MYSQL_USER             | MySQL のユーザ名（Docker で使用）         | user                               |                                          |
-| MYSQL_PASSWORD         | MySQL のパスワード（Docker で使用）       | password                           |                                          |
-| MYSQL_HOST             | MySQL のホスト名（Docker で使用）         | db                                 |                                          |
+| 変数名              | 役割                                      | デフォルト値 | DEV 環境での値 |
+| ------------------- | ----------------------------------------- | ------------ | -------------- |
+| MYSQL_ROOT_PASSWORD | MySQL のルートパスワード（Docker で使用） | password     |                |
+| MYSQL_DATABASE      | MySQL のデータベース名（Docker で使用）   | db           |                |
+| MYSQL_USER          | MySQL のユーザ名（Docker で使用）         | user         |                |
+| MYSQL_PASSWORD      | MySQL のパスワード（Docker で使用）       | password     |                |
+| MYSQL_HOST          | MySQL のホスト名（Docker で使用）         | db           |                |
 
-## API仕様書
+## API 仕様書
 
-[Swagger](https://swagger.io/)を使ってAPIの仕様を定義
-
-### 確認方法
-
-1. VS Codeの拡張機能[Swagger Viewer](https://marketplace.visualstudio.com/items?itemName=Arjun.swagger-viewer)をインストール
-
-2. VS CodeのPreview In Browserを有効にする
-
-3. 「Shift」+「Cmd」+「P」でコマンドパレットを開きPreView Swaggerを入力、選択するとブラウザでViewerが立ち上がり、API仕様が確認可能
-
-詳細は参考記事を参照
-
-## API仕様書
-
-[Swagger](https://swagger.io/)を使ってAPIの仕様を定義
+[Swagger](https://swagger.io/)を使って API の仕様を定義
 
 ### 確認方法
 
-1. VS Codeの拡張機能[Swagger Viewer](https://marketplace.visualstudio.com/items?itemName=Arjun.swagger-viewer)をインストール
+1. VS Code の拡張機能[Swagger Viewer](https://marketplace.visualstudio.com/items?itemName=Arjun.swagger-viewer)をインストール
 
-2. VS Codeの設定から「Preview In Browser」を検索し、確認後有効にする
+2. VS Code の Preview In Browser を有効にする
 
-3. 「Shift」+「Cmd」+「P」でコマンドパレットを開きPreView Swaggerを入力、選択するとブラウザでViewerが立ち上がり、API仕様が確認可能
+3. 「Shift」+「Cmd」+「P」でコマンドパレットを開き PreView Swagger を入力、選択するとブラウザで Viewer が立ち上がり、API 仕様が確認可能
 
 詳細は参考記事を参照
 
-## トラブルシューティング
+詳細は参考記事を参照
 
-## README参考記事
+## 参考記事
 
-[全プロジェクトで重宝されるイケてるREADMEを作成しよう！](https://qiita.com/shun198/items/c983c713452c041ef787)
-[OpenAPI・Swaggerでインタラクティブな API 仕様ドキュメントを作成する](https://zenn.dev/knm/articles/32106f623bd382)
+[全プロジェクトで重宝されるイケてる README を作成しよう！](https://qiita.com/shun198/items/c983c713452c041ef787)
+[OpenAPI・Swagger でインタラクティブな API 仕様ドキュメントを作成する](https://zenn.dev/knm/articles/32106f623bd382)
 
 <p align="right">(<a href="#top">トップへ</a>)</p>
+```
