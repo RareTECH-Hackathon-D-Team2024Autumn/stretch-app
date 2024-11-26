@@ -4,6 +4,7 @@ import Signup from "./components/Signup";
 import Top from "./components/Top";
 import UserEdit from "./components/UserEdit";
 import { useEffect, useState } from "react";
+import Favorite from "./components/Favorite";
 
 export default function App() {
   const [allYturlData, setAllYturlData] = useState([]);
@@ -21,6 +22,7 @@ export default function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/top" element={<Top allYturlData={allYturlData} />} />
         <Route path="/useredit" element={<UserEdit />} />
+        <Route path="/favorite" element={<Favorite />} />
       </Routes>
     </BrowserRouter>
   );

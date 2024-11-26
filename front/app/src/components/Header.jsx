@@ -9,6 +9,9 @@ export default function Header() {
         {pathName === "/UserEdit" && (
           <div className="top-page">ユーザー情報編集</div>
         )}
+        {pathName === "/favorite" && (
+          <div className="top-page">お気に入り一覧</div>
+        )}
       </header>
     </>
   );

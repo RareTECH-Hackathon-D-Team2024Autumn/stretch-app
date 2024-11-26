@@ -11,6 +11,9 @@ export default function Top(props) {
     navigate("/UserEdit");
   };
 
+  const handleFavorite = () => {
+    navigate("/favorite");
+  };
   return (
     <>
       <Header />
@@ -22,7 +25,9 @@ export default function Top(props) {
           <Yturl allYturlData={props.allYturlData} />
         </div>
       </main>
-      <button className="favorite-button">お気に入り一覧へ</button>
+      <button className="favorite-button" onClick={handleFavorite}>
+        お気に入り一覧へ
+      </button>
       <Footer />
     </>
   );
