@@ -1,0 +1,12 @@
+.top-button {
+  width: auto;
+  background-color: #0e528d;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  border-radius: 10px;
+}
+
+.top-button:hover {
+  background-color: #175892;
+}

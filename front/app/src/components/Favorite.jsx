@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import "../styles/Favorite.css";
 import Header from "./Header";
 
 export default function Favorite() {
