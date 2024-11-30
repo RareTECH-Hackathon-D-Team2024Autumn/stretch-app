@@ -1,11 +1,12 @@
 ## 必要なモジュールのインポート
 from flask import Blueprint, request, render_template, redirect, url_for, flash, jsonify, make_response
 from flask_login import login_user, login_required, logout_user, current_user
-from app.models import User
+from app.models import User, Top, YouTube
 from datetime import datetime, date
-from app import db
+from app import db, login_manager
 from wtforms import ValidationError
-import re
+from sqlalchemy import and_
+import re, json
 
 ## Blueprintのインスタンス化
 bp = Blueprint('stretch_app', __name__, url_prefix='', template_folder='./templates/build/', static_folder='./templates/build/static/')
@@ -29,14 +30,23 @@ def login():
         # メールアドレスとパスワードが正しい場合
         if user and user.validate_password(password):
            login_user(user)
-           next = request.args.get('next')
+           # ログインしたユーザーのidと同一の動画情報を取得する
+           login_id = current_user.id
+           video_info = db.session.query(YouTube, YouTube.id, YouTube.title, YouTube.url, YouTube.thumbnail, YouTube.created_at).join(Top, login_id == Top.user_id)
+           for video_infos in video_info:
+            #print("id:{}, タイトル{}:, URL:{}, サムネイル:{}, 更新時間:{}".format(video_infos.id, video_infos.title, video_infos.url, video_infos.thumbnail, video_infos.created_at))
+            info = {
+            'id': video_infos.id,
+            'title': video_infos.title,
+            'url': video_infos.url,
+            'thumbnail': video_infos.thumbnail,
+            'created_at': video_infos.created_at
+            }
+            print(info)
         else:
            ValidationError_match = str('メールアドレスもしくはパスワードが間違っています')
-           return jsonify(message = ValidationError_match),400
-        # return jsonify({'message': 'hello internal'}), 500
-    return jsonify(data) ##login画面の追加##
-
-
+           return jsonify(message = ValidationError_match), 400
+    return jsonify(list(info.items())), 200 # ログインユーザー情報とユーザーが保持している動画情報をresponseで返す
 
 ## ユーザー登録機能
 # URLが/registerの時##ログインページ##を表示し、register()関数の処理を行う（通信はget,postメソッド）
@@ -50,21 +60,16 @@ def register():
     # メールアドレスを正規表現で指定
     pattern = "^[a-zA-Z0-9_.%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9-.]{2,}+$"
     # POSTリクエスト
-    
+
     if request.method == 'POST':
         # 空欄がある場合
         if user_name == '' or mail_address == '' or password == '':
-            # flashモジュールを使用した文字の表示
-            #flash('入力されていないフォームがあります')
             ValidationError_form = str('入力されていないフォームがあります')
-            return jsonify(ValidationError_form)
-            # raise ValidationError('入力されていないフォームがあります。') #from
+            return jsonify(message = ValidationError_form), 400
         # メールアドレス形式の不一致
         elif re.match(str(pattern), mail_address) is None:
             ValidationError_mail = str('メールアドレスの形式になっていません')
-            return jsonify(ValidationError_mail)
-            #raise ValidationError('メールアドレスの形式になっていません') #mail
-            #flash('メールアドレスの形式になっていません')
+            return jsonify(message = ValidationError_mail), 400
         # 全て正しかった場合
         else:
             # 書き込まれた項目の取得
@@ -76,13 +81,10 @@ def register():
             # データベースにあるメールアドレスを取得する
             # データベースにメールアドレスが登録されていなければNone
             DBuser = User.select_by_mail_address(mail_address)
-
             # メールアドレスが取得された場合
             if DBuser != None:
                 ValidationError_mail_match = str('既に登録されています')
-                return jsonify(ValidationError_mail_match)
-                #raise ValidationError('既に登録されています') #mail_match
-                #flash('既に登録されています')
+                return jsonify(massage = ValidationError_mail_match), 400
             # メールアドレスが取得されなかった場合
             else:
                 # データベースへ書き込む
@@ -100,9 +102,35 @@ def register():
                 # データベースとの接続を終了
                 finally:
                     db.session.close()
-                # responseにjsonで返すデータを格納
-                #response = jsonify(data)
-                #response.status_code = 200
     return jsonify(data)
-    #make_response(jsonify(response))
 
+## トップページ
+@bp.route('/videoes<int:id>')
+@login_required
+def top_get_video():
+    get_id = User.query.get(id)
+    return print(get_id)
+
+
+# お気に入り登録機能
+def favorite_choice():
+    if request.method == 'POST':
+        request.get_json('')#React側の登録ボタンの変数を入れる
+        favorite = Top(
+            my_favorite = my_favorite
+        )
+        try:
+        # データベースへの接続を開始（明示的なトランザクションをTrueにする）
+            with db.session.begin(subtransactions=True):
+            # データベースに書き込むデータを用意する（引数は先ほどのuser）
+                db.session.add(favorite)
+                # データベースに書き込みを実行する
+                db.session.commit()
+        # 書き込みがうまくいかない場合
+        except:
+            # データベースへのお書き込みを行わずロールバック
+            db.session.rollback()
+        # データベースとの接続を終了
+        finally:
+            db.session.close()
+    return jsonify('my_favorite')

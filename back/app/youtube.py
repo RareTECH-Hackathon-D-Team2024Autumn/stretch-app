@@ -63,9 +63,9 @@ title = snippetInfo['title']
 url = ('https://www.youtube.com/watch?v=') + str(idInfo['videoId'])
 # サムネイル
 thumbnail = (thumbnailInfo['url'])
-# データベースにデータをインサート
+# データベースに取得したデータをインサート
 cursor.execute('INSERT INTO youtube_videoes(title, url, thumbnail) VALUES(%s, %s, %s)',(title, url, thumbnail))
- # データベースにインサートを反映
+# データベースにインサートを反映
 conn.commit()
 
 # 接続を閉じる

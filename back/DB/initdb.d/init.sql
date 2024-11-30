@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS top_pages(
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     user_id INT NOT NULL,
     video_id INT NOT NULL,
-    my_favorite BOOLEAN NOT NULL,
+    my_favorite BOOLEAN,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id),
@@ -53,3 +53,28 @@ INSERT INTO youtube_videoes VALUES
     (5, "【医師監修！肩こり解消】座ってできる3分ストレッチ ", "https://www.youtube.com/watch?v=NwleJdbAxCs", "https://i.ytimg.com/vi/NwleJdbAxCs/default.jpg", "2024-10-05 06:01:04"),
     (6, " 巻き肩さん、30秒で速攻改善ストレッチだよ！ ",  "https://www.youtube.com/watch?v=Y7177dPkrSE", "https://i.ytimg.com/vi/Y7177dPkrSE/default.jpg", "2024-10-06 06:02:11"),
     (7, " 巻き肩はぶっちゃけ簡単！ #shorts ",  "https://www.youtube.com/watch?v=bA2xlC_pTTU", "https://i.ytimg.com/vi/bA2xlC_pTTU/default.jpg", "2024-10-01 07:00:59");
+
+
+-- top_pagesテーブルにデフォルトのuser_id（ユーザー3名）とvideo_id（動画7本分）を追加
+INSERT INTO top_pages VALUES
+    (1, 1, 1, 0, now(), now()),
+    (2, 1, 2, 0, now(), now()),
+    (3, 1, 3, 0, now(), now()),
+    (4, 1, 4, 0, now(), now()),
+    (5, 1, 5, 0, now(), now()),
+    (6, 1, 6, 0, now(), now()),
+    (7, 1, 7, 0, now(), now()),
+    (8, 2, 1, 0, now(), now()),
+    (9, 2, 2, 0, now(), now()),
+    (10, 2, 3, 0, now(), now()),
+    (11, 2, 4, 0, now(), now()),
+    (12, 2, 5, 0, now(), now()),
+    (13, 2, 6, 0, now(), now()),
+    (14, 2, 7, 0, now(), now()),
+    (15, 3, 1, 0, now(), now()),
+    (16, 3, 2, 0, now(), now()),
+    (17, 3, 3, 0, now(), now()),
+    (18, 3, 4, 0, now(), now()),
+    (19, 3, 5, 0, now(), now()),
+    (20, 3, 6, 0, now(), now()),
+    (21, 3, 7, 0, now(), now());

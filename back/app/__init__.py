@@ -19,8 +19,8 @@ DB_NAME = os.getenv('DB_NAME')
 
 # インポートしたflask_loginのLoginManagerのクラスをインスタンス化
 login_manager = LoginManager()
-# ログインしていないユーザーがログイン画面以外（トップページ等）を見ようとした時以外にstretch-app.login(/login)へ遷移させる
-login_manager.login_view = 'stretch_app.login'
+# ログインしていないユーザーがログイン画面以外（トップページ等）を見ようとした時以外にログイン画面に遷移させる
+login_manager.login_view = 'http://localhost:3000'
 # loginviewメソッドが実行されると表示されるメッセージをlogin_messageメソッドに定義
 login_manager.login_message = 'ログインして下さい'
 
@@ -46,7 +46,8 @@ def create_app():
         })
     # メモリを消費しないためFalseに設定
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
+    # jsonのASCIIをオフにする
+    app.json.ensure_ascii = False
     ## 初期設定
     # 全てのオリジンからアクセスを許可
     #CORS(app, resources={r"/*": {"origins":["http://127.0.0.1:3000", "http://127.0.0.1:5001"]}})

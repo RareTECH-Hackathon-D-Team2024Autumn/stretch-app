@@ -31,11 +31,12 @@ export default function Signup() {
 
       setResponseMessage(response.data.message || "登録されました！");
 
-      navigate("/top"); //Topページに遷移
+      navigate("/"); //loginページに遷移
 
     } catch (error) {
-      console.error("登録中にエラーが発生しました。：", error);
-      setResponseMessage("登録中にエラーが発生しました。")
+      const errorMessage = error.response.data.message || "既に登録されています。";
+      
+      setResponseMessage(errorMessage);
     }
   };
 
