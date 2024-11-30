@@ -79,6 +79,11 @@ class YouTube(UserMixin, db.Model):
     created_at = db.Column(db.DateTime, server_default=func.now())
     videoes = relationship('Top', backref='YouTube')
 
+    def __init__(self, title, url, thumbnail):
+        self.title = title
+        self.url = url
+        self.thumbnail = thumbnail
+
 
 #top_pagesテーブルの作成
 class Top(UserMixin, db.Model):
@@ -95,4 +100,8 @@ class Top(UserMixin, db.Model):
     # DateTimeのデフォルト値をユーザー作成時のサーバーの時刻とする
     updated_at = db.Column(db.DateTime, server_default=text('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'))
 
+    def __init__(self, user_id, video_id, my_favorite):
+        self.user_id = user_id
+        self.video_id = video_id
+        self.my_favorite = my_favorite
 

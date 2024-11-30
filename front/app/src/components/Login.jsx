@@ -74,7 +74,7 @@ export default function Login() {
           </div>
         </div>
       </form>
-      <p>{responseMessage}</p>
+      <p className="responseMessage">{responseMessage}</p>
     </div>
   );
 }
